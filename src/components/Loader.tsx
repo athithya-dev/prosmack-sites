@@ -59,10 +59,10 @@ export default function Loader({ onComplete }: LoaderProps) {
 
   // Handle video playback, metadata loading, and safe fallback timeouts
   useEffect(() => {
-    // Fast safety fallback: on mobile or slow connection, transition after max 4.5s
+    // Generous fallback only in case network completely freezes (20s)
     safetyTimerRef.current = setTimeout(() => {
       handleComplete();
-    }, 4500);
+    }, 20000);
 
     const video = videoRef.current;
     if (video) {
@@ -73,11 +73,11 @@ export default function Loader({ onComplete }: LoaderProps) {
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
-          // If browser strictly blocks un-gestured autoplay, transition quickly
+          // If browser strictly blocks un-gestured autoplay, transition after short grace period
           if (safetyTimerRef.current) clearTimeout(safetyTimerRef.current);
           safetyTimerRef.current = setTimeout(() => {
             handleComplete();
-          }, 1500);
+          }, 2500);
         });
       }
     }
@@ -93,15 +93,16 @@ export default function Loader({ onComplete }: LoaderProps) {
     const duration = e.currentTarget.duration;
     if (duration && !isNaN(duration) && duration > 0) {
       if (safetyTimerRef.current) clearTimeout(safetyTimerRef.current);
+      // Give full duration + 1.5s grace before safety fallback
       safetyTimerRef.current = setTimeout(() => {
         handleComplete();
-      }, Math.min((duration + 1) * 1000, 6000));
+      }, (duration + 1.5) * 1000);
     }
   };
 
   const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
     const video = e.currentTarget;
-    if (video.duration && video.currentTime >= video.duration - 0.15) {
+    if (video.duration && video.currentTime >= video.duration - 0.05) {
       handleComplete();
     }
   };
@@ -111,7 +112,7 @@ export default function Loader({ onComplete }: LoaderProps) {
       ref={containerRef}
       onClick={handleComplete}
       className="fixed inset-0 bg-[#050505] z-[99999] flex justify-center items-center select-none overflow-hidden cursor-pointer"
-      title="Click or tap anywhere to enter"
+      title="Click or tap anywhere to skip"
     >
       {/* Edge-to-edge adaptive video player */}
       <video
@@ -119,7 +120,7 @@ export default function Loader({ onComplete }: LoaderProps) {
         autoPlay
         muted
         playsInline
-        preload="metadata"
+        preload="auto"
         onEnded={handleComplete}
         onError={handleComplete}
         onLoadedMetadata={handleLoadedMetadata}
@@ -130,6 +131,7 @@ export default function Loader({ onComplete }: LoaderProps) {
         <source src={getAssetPath("/preloader.mp4")} media="(min-width: 768px)" type="video/mp4" />
         <source src={getAssetPath("/preloader.mp4")} type="video/mp4" />
       </video>
+
 
       {/* Prominent Touch-Friendly Skip Button */}
       <div className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 z-30 pointer-events-auto">
