@@ -35,8 +35,9 @@ export default function FeaturedWork() {
   return (
     <section
       id="featured-work"
-      className="relative w-full bg-[#050505] text-white py-16 sm:py-24 md:py-28 overflow-hidden border-t border-white/5 z-20 select-none flex flex-col items-center justify-center"
+      className="relative w-full bg-[#050505] text-white pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-24 md:py-28 overflow-hidden border-t border-white/10 z-20 select-none flex flex-col items-center justify-center"
     >
+
 
       {/* Centered Ambient Lighting */}
       <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-accent/5 rounded-full blur-[160px] -z-10" />

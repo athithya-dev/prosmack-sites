@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
+
 
 const slides = [
   {
@@ -43,8 +43,6 @@ const slides = [
 export default function HorizontalExperience() {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollSectionRef = useRef<HTMLDivElement>(null);
-  const mobileScrollRef = useRef<HTMLDivElement>(null);
-  const [activeMobileIndex, setActiveMobileIndex] = useState(0);
 
   // GSAP Horizontal Pinning ONLY for desktop (>=1024px)
   useEffect(() => {
@@ -74,31 +72,14 @@ export default function HorizontalExperience() {
     return () => mm.revert();
   }, []);
 
-  const handleMobileScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const target = e.currentTarget;
-    const scrollLeft = target.scrollLeft;
-    const cardWidth = target.offsetWidth * 0.85;
-    const index = Math.round(scrollLeft / cardWidth);
-    setActiveMobileIndex(Math.min(Math.max(index, 0), slides.length - 1));
-  };
-
-  const scrollMobileTo = (index: number) => {
-    if (!mobileScrollRef.current) return;
-    const cardWidth = mobileScrollRef.current.offsetWidth * 0.85 + 16;
-    mobileScrollRef.current.scrollTo({
-      left: index * cardWidth,
-      behavior: 'smooth',
-    });
-    setActiveMobileIndex(index);
-  };
-
   return (
+
     <section
       ref={containerRef}
-      className="relative w-full bg-background overflow-hidden border-t border-foreground/10"
+      className="hidden lg:block relative w-full bg-background overflow-hidden border-t border-foreground/10"
     >
       {/* ── DESKTOP VIEW (Pinned Horizontal Canvas) ─────────────────── */}
-      <div className="hidden lg:block w-full">
+      <div className="w-full">
         <div
           ref={scrollSectionRef}
           className="flex h-screen w-[500vw] transform-gpu will-change-transform"
@@ -156,106 +137,7 @@ export default function HorizontalExperience() {
           ))}
         </div>
       </div>
-
-      {/* ── MOBILE & TABLET VIEW (Zero-Gap Native Swipe Deck) ───────── */}
-      <div className="block lg:hidden w-full py-12 px-5 sm:px-8">
-        
-        {/* Header Row */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            <span className="text-xs font-mono font-bold tracking-[0.2em] text-accent uppercase">
-              Core Experiences
-            </span>
-          </div>
-          <span className="text-[11px] font-mono text-secondary">
-            {activeMobileIndex + 1} / {slides.length}
-          </span>
-        </div>
-
-        {/* Swipeable Carousel */}
-        <div
-          ref={mobileScrollRef}
-          onScroll={handleMobileScroll}
-          className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 -mx-5 px-5 sm:-mx-8 sm:px-8"
-        >
-          {slides.map((slide, i) => (
-            <div
-              key={slide.num}
-              className="w-[88vw] sm:w-[72vw] flex-shrink-0 snap-center rounded-3xl bg-surface/95 border border-foreground/15 p-6 sm:p-8 flex flex-col justify-between min-h-[360px] relative overflow-hidden shadow-xl backdrop-blur-md"
-            >
-              {/* Subtle Card Background Number */}
-              <div className="absolute top-2 right-4 text-8xl font-black text-outline opacity-5 leading-none pointer-events-none">
-                {slide.num}
-              </div>
-
-              {/* Top Meta */}
-              <div>
-                <span className="text-xs tracking-widest text-accent uppercase font-bold block mb-2.5 font-mono">
-                  {slide.num} — {slide.tag}
-                </span>
-                <h3 className="font-satoshi font-black text-3xl sm:text-4xl text-foreground uppercase tracking-tight leading-tight">
-                  {slide.title}
-                </h3>
-              </div>
-
-              {/* Description */}
-              <p className="text-secondary text-sm sm:text-base leading-relaxed mt-4 mb-5 font-normal">
-                {slide.desc}
-              </p>
-
-              {/* Footer Progress Tag */}
-              <div className="pt-4 border-t border-foreground/10 flex items-center justify-between">
-                <span className="text-xs uppercase font-mono tracking-wider text-secondary font-semibold">
-                  ProSmack Studio
-                </span>
-                <span className="text-accent text-sm font-bold font-mono">
-                  0{i + 1}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Mobile Navigation Dots & Arrows */}
-        <div className="flex items-center justify-between pt-4 mt-2">
-          <div className="flex gap-2 items-center">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => scrollMobileTo(i)}
-                aria-label={`Slide ${i + 1}`}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  i === activeMobileIndex ? 'w-8 bg-accent' : 'w-2.5 bg-foreground/20'
-                }`}
-              />
-            ))}
-          </div>
-
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={() => scrollMobileTo(Math.max(0, activeMobileIndex - 1))}
-              disabled={activeMobileIndex === 0}
-              aria-label="Previous Slide"
-              className="w-10 h-10 rounded-full border border-foreground/15 flex items-center justify-center text-foreground hover:border-accent hover:text-accent disabled:opacity-30 disabled:pointer-events-none active:scale-95 transition-all"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollMobileTo(Math.min(slides.length - 1, activeMobileIndex + 1))}
-              disabled={activeMobileIndex === slides.length - 1}
-              aria-label="Next Slide"
-              className="w-10 h-10 rounded-full border border-foreground/15 flex items-center justify-center text-foreground hover:border-accent hover:text-accent disabled:opacity-30 disabled:pointer-events-none active:scale-95 transition-all"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-
-      </div>
     </section>
   );
 }
+
