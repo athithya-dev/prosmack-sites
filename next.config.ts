@@ -1,16 +1,21 @@
 import type { NextConfig } from "next";
 
-const isProd = process.env.NODE_ENV === "production";
+const isGithubActions = process.env.GITHUB_ACTIONS === "true";
+const isVercel = process.env.VERCEL === "1" || Boolean(process.env.VERCEL);
+
+// On GitHub Pages (https://<user>.github.io/prosmack-sites/), basePath is required.
+// On Vercel (https://<app>.vercel.app) or local development, root "/" is used.
 const repoName = "prosmack-sites";
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? (isProd ? `/${repoName}` : "");
+const basePath =
+  process.env.NEXT_PUBLIC_BASE_PATH ??
+  (isGithubActions && !isVercel ? `/${repoName}` : "");
 
 const nextConfig: NextConfig = {
   devIndicators: false,
-  output: "export",
-  trailingSlash: true,
+  ...(isGithubActions && !isVercel ? { output: "export", trailingSlash: true } : {}),
   basePath: basePath || undefined,
   images: {
-    unoptimized: true,
+    unoptimized: isGithubActions && !isVercel,
   },
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
@@ -18,4 +23,5 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
 
