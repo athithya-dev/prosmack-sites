@@ -346,10 +346,19 @@ const Card = ({ slide, index, total, progress, config, onSelect }: CardProps) =>
     Math.round(100 - Math.abs(o) * 10),
   );
 
+  const darkOverlayOpacity = useTransform(
+    offset,
+    [-2, -0.6, 0, 0.6, 2],
+    [0.65, 0.35, 0, 0.35, 0.65],
+  );
+
+  const titleOpacity = useTransform(offset, [-0.6, 0, 0.6], [0.4, 1, 0.4]);
+  const descOpacity = useTransform(offset, [-0.6, 0, 0.6], [0.2, 1, 0.2]);
+
   return (
     <motion.div
       style={{ zIndex }}
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none transform-gpu will-change-transform"
     >
       <motion.div
         style={{
@@ -361,7 +370,7 @@ const Card = ({ slide, index, total, progress, config, onSelect }: CardProps) =>
         }}
         onClick={onSelect}
         className={cn(
-          "relative rounded-3xl overflow-hidden bg-[#0d0d0d] group border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.85)] transition-all duration-300",
+          "relative rounded-3xl overflow-hidden bg-[#0d0d0d] group border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.85)] transition-shadow duration-300 transform-gpu will-change-transform",
           "w-[260px] h-[360px] xs:w-[280px] xs:h-[390px] sm:w-[310px] sm:h-[430px] md:w-[340px] md:h-[470px] lg:w-[360px] lg:h-[490px]",
           "pointer-events-auto cursor-pointer"
         )}
@@ -370,19 +379,15 @@ const Card = ({ slide, index, total, progress, config, onSelect }: CardProps) =>
         <img
           src={getAssetPath(slide.image)}
           alt={slide.title}
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none transition-transform duration-700 group-hover:scale-105"
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none transition-transform duration-500 group-hover:scale-105"
         />
 
         {/* Dynamic Darkening for background / inactive cards */}
         <motion.div
-          style={{
-            opacity: useTransform(
-              offset,
-              [-2, -0.6, 0, 0.6, 2],
-              [0.65, 0.35, 0, 0.35, 0.65],
-            ),
-          }}
-          className="absolute inset-0 bg-black pointer-events-none transition-opacity"
+          style={{ opacity: darkOverlayOpacity }}
+          className="absolute inset-0 bg-black pointer-events-none transition-opacity duration-200"
         />
 
         {/* Multi-layered cinematic gradient for text contrast */}
@@ -399,29 +404,25 @@ const Card = ({ slide, index, total, progress, config, onSelect }: CardProps) =>
           </Badge>
         </div>
 
-        {/* Bottom Content: Title & Description (Centred ONLY on Mobile, Left-aligned on Desktop) */}
+        {/* Bottom Content: Title & Description */}
         <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-5 sm:right-5 text-white text-center sm:text-left flex flex-col items-center sm:items-start z-10 pointer-events-none">
           <motion.p
-            style={{
-              opacity: useTransform(offset, [-0.6, 0, 0.6], [0.4, 1, 0.4]),
-            }}
+            style={{ opacity: titleOpacity }}
             className="text-lg sm:text-xl md:text-2xl font-satoshi font-black leading-tight mb-2 sm:mb-2 uppercase tracking-tight text-white drop-shadow-lg text-center sm:text-left w-full"
           >
             {slide.title}
           </motion.p>
           <motion.p
-            style={{
-              opacity: useTransform(offset, [-0.6, 0, 0.6], [0.2, 1, 0.2]),
-            }}
+            style={{ opacity: descOpacity }}
             className="text-sm sm:text-sm md:text-base text-white/90 line-clamp-3 font-normal leading-relaxed text-center sm:text-left w-full"
           >
             {slide.description}
           </motion.p>
         </div>
-
       </motion.div>
     </motion.div>
   );
 };
 
 export default CarouselStacked;
+
