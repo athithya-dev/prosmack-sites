@@ -64,23 +64,22 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out flex items-center ${
         isScrolled
-          ? 'h-14 sm:h-16 bg-background/70 backdrop-blur-xl border-b border-foreground/10 shadow-lg shadow-black/20'
+          ? 'h-14 sm:h-16 bg-background/80 backdrop-blur-xl border-b border-foreground/10 shadow-lg shadow-black/20'
           : 'h-16 sm:h-20 bg-transparent'
       }`}
     >
-      <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 md:px-16 grid grid-cols-3 items-center h-full">
+      <div className="w-full px-5 sm:px-8 md:px-12 flex items-center justify-between relative h-full">
+        {/* Left Spacer */}
+        <div className="w-9 sm:w-10 h-9 sm:h-10 invisible" />
 
-        {/* Left Column (Empty spacing) */}
-        <div className="w-full" />
-
-        {/* Center Column (Logo) */}
-        <div className="flex justify-center items-center">
-          <Magnetic range={50}>
+        {/* Absolute Centered Logo on ALL Devices */}
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-auto">
+          <Magnetic range={40}>
             <a
               href="#"
               onClick={(e) => handleLinkClick(e, 'hero')}
               className="flex items-center outline-none"
-              aria-label="Home"
+              aria-label="ProSmack Home"
             >
               <Image
                 src={getAssetPath("/logo.png")}
@@ -88,35 +87,34 @@ export default function Navbar() {
                 width={140}
                 height={32}
                 priority
-                className="h-8 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                className="h-7 sm:h-8 w-auto object-contain transition-transform duration-300 hover:scale-105 active:scale-95"
                 style={{ width: 'auto', height: 'auto' }}
               />
-
             </a>
           </Magnetic>
         </div>
 
-        {/* Right Column (Theme Toggler) */}
-        <div className="flex justify-end items-center z-50">
+        {/* Right-aligned Theme Toggler */}
+        <div className="flex items-center justify-end z-20 pointer-events-auto">
           <Magnetic range={30}>
             <button
               onClick={toggleTheme}
-              className="flex items-center justify-center w-10 h-10 rounded-full border border-foreground/10 bg-foreground/[0.03] backdrop-blur-md cursor-default outline-none select-none hover:bg-foreground/[0.08] transition-colors duration-300"
+              className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-foreground/10 bg-foreground/[0.03] backdrop-blur-md cursor-pointer outline-none select-none hover:bg-foreground/[0.08] active:scale-90 transition-all duration-300"
               aria-label="Toggle Theme"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={theme}
-                  initial={{ y: -10, opacity: 0, rotate: -45 }}
+                  initial={{ y: -8, opacity: 0, rotate: -45 }}
                   animate={{ y: 0, opacity: 1, rotate: 0 }}
-                  exit={{ y: 10, opacity: 0, rotate: 45 }}
-                  transition={{ duration: 0.25, ease: "easeInOut" }}
+                  exit={{ y: 8, opacity: 0, rotate: 45 }}
+                  transition={{ duration: 0.2, ease: "easeInOut" }}
                   className="flex items-center justify-center"
                 >
                   {theme === 'dark' ? (
-                    <Sun className="w-5 h-5 text-accent" />
+                    <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-accent" />
                   ) : (
-                    <Moon className="w-5 h-5 text-accent" />
+                    <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-accent" />
                   )}
                 </motion.div>
               </AnimatePresence>
@@ -127,3 +125,4 @@ export default function Navbar() {
     </header>
   );
 }
+
