@@ -5,11 +5,11 @@ import gsap from 'gsap';
 import Image from 'next/image';
 
 const philosophyWords = [
-  { text: 'Influence', top: '10%', left: '2%', speed: 1.2 },
-  { text: 'Authority', top: '25%', left: '60%', speed: 0.8 },
-  { text: 'Vision', top: '75%', left: '2%', speed: 1.5 },
-  { text: 'Growth', top: '70%', left: '58%', speed: 1.0 },
-  { text: 'Recognition', top: '42%', left: '0%', speed: 1.3 },
+  { text: 'Influence', top: '10%', left: '4%', speed: 1.2 },
+  { text: 'Authority', top: '24%', left: '52%', speed: 0.8 },
+  { text: 'Vision', top: '76%', left: '4%', speed: 1.5 },
+  { text: 'Growth', top: '70%', left: '54%', speed: 1.0 },
+  { text: 'Recognition', top: '44%', left: '2%', speed: 1.3 },
 ];
 
 export default function BrandPhilosophy() {
@@ -25,7 +25,7 @@ export default function BrandPhilosophy() {
       const { clientX, clientY } = e;
 
       // 1. Interactive Word Push Physics
-      wordsRef.current.forEach((wordEl, index) => {
+      wordsRef.current.forEach((wordEl) => {
         if (!wordEl) return;
 
         const rect = wordEl.getBoundingClientRect();
@@ -36,31 +36,29 @@ export default function BrandPhilosophy() {
         const diffY = wordY - clientY;
         const distance = Math.hypot(diffX, diffY);
 
-        // If mouse is within 180px, push the word away
-        const threshold = 180;
+        const threshold = 160;
         if (distance < threshold) {
-          const power = (threshold - distance) / threshold; // 0 to 1
-          const pushX = (diffX / distance) * power * 60; // Max push of 60px
-          const pushY = (diffY / distance) * power * 60;
+          const power = (threshold - distance) / threshold;
+          const pushX = (diffX / distance) * power * 50;
+          const pushY = (diffY / distance) * power * 50;
 
           gsap.to(wordEl, {
             x: pushX,
             y: pushY,
-            scale: 1.1,
+            scale: 1.08,
             color: 'var(--accent)',
             textShadow: '0 0 15px rgba(234, 13, 35, 0.4)',
-            duration: 0.4,
+            duration: 0.35,
             ease: 'power2.out',
           });
         } else {
-          // Return to home position
           gsap.to(wordEl, {
             x: 0,
             y: 0,
             scale: 1,
             color: 'var(--foreground)',
             textShadow: 'none',
-            duration: 0.8,
+            duration: 0.7,
             ease: 'power3.out',
           });
         }
@@ -68,13 +66,13 @@ export default function BrandPhilosophy() {
 
       // 2. Parallax effect on Portrait Image
       if (portraitContainerRef.current) {
-        const moveX = (clientX - window.innerWidth / 2) * 0.02;
-        const moveY = (clientY - window.innerHeight / 2) * 0.02;
+        const moveX = (clientX - window.innerWidth / 2) * 0.015;
+        const moveY = (clientY - window.innerHeight / 2) * 0.015;
 
         gsap.to(portraitContainerRef.current, {
           x: moveX,
           y: moveY,
-          duration: 1,
+          duration: 0.9,
           ease: 'power2.out',
         });
       }
@@ -88,40 +86,40 @@ export default function BrandPhilosophy() {
     <section
       ref={containerRef}
       id="philosophy"
-      className="relative w-full min-h-screen bg-background py-24 md:py-32 flex flex-col justify-center items-center overflow-hidden"
+      className="relative w-full bg-background py-10 sm:py-16 md:py-24 flex flex-col justify-center items-center overflow-hidden border-t border-foreground/10"
     >
-      {/* Glow decorative blobs */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/2 rounded-full blur-[180px] pointer-events-none" />
+      {/* Glow decorative background */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/3 rounded-full blur-[160px] -z-10" />
 
-      <div className="max-w-7xl mx-auto w-full px-6 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center z-10">
+      <div className="max-w-7xl mx-auto w-full px-6 sm:px-8 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center z-10">
         
         {/* Left Side: Portrait & floating words canvas */}
         <div className="lg:col-span-6 flex items-center justify-center w-full">
-          <div className="relative w-full max-w-[280px] sm:w-80 md:w-[420px] aspect-[3/4] flex items-center justify-center select-none">
+          <div className="relative w-full max-w-[260px] sm:max-w-[320px] md:max-w-[380px] aspect-[3/4] flex items-center justify-center select-none">
             
-            {/* Portrait Image Container (Centered relative to container) */}
+            {/* Portrait Image Container */}
             <div
               ref={portraitContainerRef}
-              className="relative w-[65%] aspect-[2/3] rounded-lg overflow-hidden border border-white/10 shadow-2xl transform-gpu"
+              className="relative w-[68%] aspect-[2/3] rounded-2xl overflow-hidden border border-foreground/10 shadow-2xl transform-gpu"
             >
               <Image
                 src="/philosophy_portrait.jpg"
                 alt="Brand Philosophy Portrait"
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, 33vw"
+                sizes="(max-width: 768px) 80vw, 35vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
             </div>
 
-            {/* Interactive Floating Words (Relative to parent container bounds) */}
+            {/* Interactive Floating Words (Responsive sizes and bounded positions) */}
             {philosophyWords.map((word, index) => (
               <div
                 key={word.text}
                 ref={(el) => {
                   if (el) wordsRef.current[index] = el;
                 }}
-                className="absolute font-satoshi font-black text-base sm:text-xl md:text-3xl lg:text-3xl xl:text-4xl uppercase tracking-tighter text-foreground cursor-default select-none transition-shadow duration-300 transform-gpu z-20 whitespace-nowrap"
+                className="absolute font-satoshi font-black text-xs sm:text-base md:text-xl lg:text-2xl uppercase tracking-tight text-foreground cursor-default select-none transition-shadow duration-300 transform-gpu z-20 whitespace-nowrap"
                 style={{
                   top: word.top,
                   left: word.left,
@@ -134,19 +132,27 @@ export default function BrandPhilosophy() {
         </div>
 
         {/* Right Side: Philosophy Statement */}
-        <div className="lg:col-span-6 flex flex-col items-start justify-center gap-6">
-          <span className="text-accent font-satoshi text-xs md:text-sm tracking-[0.4em] uppercase font-bold">
-            Our Belief
-          </span>
-          <h2 className="font-satoshi font-black text-4xl md:text-6xl text-foreground uppercase tracking-tight leading-none">
-            Attention is the New Currency.
+        <div className="lg:col-span-6 flex flex-col items-start justify-center gap-4 sm:gap-5 text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-foreground/10 bg-foreground/[0.03]">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+            <span className="text-accent font-satoshi text-xs tracking-[0.25em] uppercase font-bold">
+              Our Belief
+            </span>
+          </div>
+
+          <h2 className="font-satoshi font-black text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground uppercase tracking-tight leading-[1.08]">
+            Attention is the <br className="hidden sm:inline" />
+            <span className="text-accent">New Currency.</span>
           </h2>
-          <div className="w-20 h-[2px] bg-accent" />
-          <p className="text-secondary text-sm md:text-lg leading-relaxed max-w-xl">
-            In an over-saturated digital landscape, noise is abundant but attention is scarce. We don't just build websites, design brands, or publish content. We build systems that capture attention, validate authority, and scale influence. 
+
+          <div className="w-16 h-[2px] bg-accent" />
+
+          <p className="text-secondary text-xs sm:text-base leading-relaxed max-w-xl font-normal">
+            In an over-saturated digital landscape, noise is abundant but attention is scarce. We don&apos;t just build websites, design brands, or publish content. We build systems that capture attention, validate authority, and scale influence. 
           </p>
-          <p className="text-secondary/70 text-xs md:text-sm leading-relaxed max-w-xl">
-            If your brand isn't commanding attention, you are invisible. We redefine branding from a passive identity to an active force of market gravity.
+
+          <p className="text-secondary/75 text-xs sm:text-sm leading-relaxed max-w-xl font-medium">
+            If your brand isn&apos;t commanding attention, you are invisible. We redefine branding from a passive identity to an active force of market gravity.
           </p>
         </div>
       </div>

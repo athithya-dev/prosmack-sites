@@ -1,165 +1,70 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
-
-const testimonials = [
-  {
-    quote: "ProSmack redefined how we present our brand. Their creative production and positioning strategy generated unprecedented demand.",
-    author: "Marcus Sterling",
-    role: "CEO, Apex Tech Group",
-  },
-  {
-    quote: "The cinematic brand film ProSmack produced wasn't just a video; it was an emotional experience. It sold out our inventory in minutes.",
-    author: "Elena Rostova",
-    role: "Founder, Luxe Chrono Group",
-  },
-  {
-    quote: "Their personal branding system is flawless. They mapped my story and scaled my digital presence into an absolute authority asset.",
-    author: "Dr. Aris Thorne",
-    role: "Director, Futura Network",
-  },
-];
+import React from 'react';
+import { motion } from 'framer-motion';
+import { StaggerTestimonials, prosmackTestimonials } from '@/components/ui/stagger-testimonials';
 
 export default function Testimonials() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const deckRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement[]>([]);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    const deck = deckRef.current;
-    if (!container || !deck) return;
-
-    const cards = cardsRef.current;
-    
-    // Set 3D perspective layouts on initial load
-    cards.forEach((card, index) => {
-      if (!card) return;
-      
-      const zIndex = cards.length - index;
-      const yOffset = index * 20; // 20px stack offset
-      const scale = 1 - index * 0.05; // nested scale down
-      const rotateX = -index * 5; // nested tilting
-
-      gsap.set(card, {
-        zIndex,
-        y: yOffset,
-        scale,
-        transformOrigin: 'bottom center',
-        rotateX,
-      });
-    });
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 1,
-        pin: true,
-        anticipatePin: 1,
-      },
-    });
-
-    // Animate peeling off cards one by one
-    cards.forEach((card, index) => {
-      if (index === cards.length - 1) return; // Last card stays pinned
-
-      const nextCards = cards.slice(index + 1);
-
-      tl.to(card, {
-        xPercent: -120,
-        rotateY: -35,
-        rotateZ: -10,
-        opacity: 0,
-        filter: 'blur(5px)',
-        duration: 1.5,
-        ease: 'power1.inOut',
-      }, `peel-${index}`)
-
-      // Shift lower cards up into focus
-      nextCards.forEach((nextCard, nextIdx) => {
-        const targetScale = 1 - nextIdx * 0.05;
-        const targetY = nextIdx * 20;
-        const targetRotateX = -nextIdx * 5;
-
-        tl.to(nextCard, {
-          scale: targetScale,
-          y: targetY,
-          rotateX: targetRotateX,
-          duration: 1.5,
-          ease: 'power2.out',
-        }, `peel-${index}`);
-      });
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.trigger === container) {
-          trigger.kill();
-        }
-      });
-    };
-  }, []);
-
   return (
     <section
-      ref={containerRef}
       id="testimonials"
-      className="relative w-full h-[250vh] bg-background flex flex-col items-center justify-start py-24 md:py-32"
+      className="relative w-full bg-[#050505] text-white py-24 sm:py-32 md:py-40 border-t border-white/5 z-20 overflow-hidden select-none flex flex-col items-center justify-center"
     >
-      <div className="sticky top-20 w-full flex flex-col items-center justify-center min-h-[480px] h-[85vh] md:h-[80vh] overflow-hidden px-6">
+      {/* Centered Ambient Background Lighting */}
+      <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-accent/5 rounded-full blur-[180px] -z-10" />
+
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
         
-        {/* Section Title Header */}
-        <div className="text-center mb-8 md:mb-16">
-          <span className="text-accent font-satoshi text-xs md:text-sm tracking-[0.4em] uppercase font-bold block mb-4">
-            Endorsements
-          </span>
-          <h2 className="font-satoshi font-black text-4xl md:text-7xl text-foreground uppercase tracking-tight">
-            Client Words.
-          </h2>
+        {/* Perfectly Centered Header Section */}
+        <div className="flex flex-col items-center text-center mb-12 sm:mb-16 max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-4"
+          >
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+            <span className="text-xs font-mono font-bold tracking-[0.2em] text-accent uppercase">
+              Client Testimonials
+            </span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl sm:text-5xl md:text-6xl font-black font-satoshi uppercase tracking-tight text-white leading-tight text-center"
+          >
+            Real Words From <br className="hidden sm:inline" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-red-500 to-orange-400">
+              Our Visionary Clients
+            </span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-4 text-xs sm:text-base text-secondary max-w-lg mx-auto font-normal leading-relaxed text-center"
+          >
+            Click cards or use the arrows to explore genuine reviews from brand founders, journalists, and photographers who trusted Prosmack.
+          </motion.p>
         </div>
 
-        {/* 3D Stack Card Deck Container */}
-        <div
-          ref={deckRef}
-          className="relative w-full max-w-2xl h-[340px] md:h-[45vh]"
-          style={{ perspective: '1200px', transformStyle: 'preserve-3d' }}
+        {/* Stagger Testimonials Interactive Animated Deck */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="w-full flex justify-center items-center"
         >
-          {testimonials.map((test, index) => (
-            <div
-              key={test.author}
-              ref={(el) => {
-                if (el) cardsRef.current[index] = el;
-              }}
-              className="absolute inset-0 w-full h-full bg-surface border border-white/5 rounded-2xl p-6 md:p-12 flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform-gpu"
-            >
-              {/* Quote icon detail */}
-              <div className="text-accent text-5xl md:text-7xl font-serif leading-none h-4 opacity-50 select-none">
-                “
-              </div>
+          <StaggerTestimonials items={prosmackTestimonials} />
+        </motion.div>
 
-              {/* Text Quote */}
-              <p className="font-satoshi text-base md:text-2xl text-foreground leading-relaxed italic mt-2 md:mt-4">
-                {test.quote}
-              </p>
-
-              {/* Author Metadata */}
-              <div className="flex flex-col mt-6 border-t border-white/5 pt-4">
-                <span className="font-satoshi font-bold text-sm md:text-base text-foreground">
-                  {test.author}
-                </span>
-                <span className="text-[10px] tracking-wider text-secondary uppercase mt-1">
-                  {test.role}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

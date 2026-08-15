@@ -1,139 +1,71 @@
 'use client';
 
-import React from "react";
-import { ContainerScroll } from "@/components/ui/container-scroll-animation";
-import { Target, Palette, Megaphone, Share2, Video, Sparkles } from "lucide-react";
-
-const servicesList = [
-  {
-    title: "Brand Strategy",
-    description: "Align your identity, identify market gaps, and lock in positioning with military-grade precision.",
-    image: "/services_strategy.jpg",
-    icon: Target,
-  },
-  {
-    title: "Branding & Identity",
-    description: "Bespoke design, luxury typography systems, and identity frameworks that project authority.",
-    image: "/services_branding.jpg",
-    icon: Palette,
-  },
-  {
-    title: "Campaign Advertising",
-    description: "Multi-channel media planning, custom design, and ROI-driven ad funnels built to convert.",
-    image: "/services_advertising.jpg",
-    icon: Megaphone,
-  },
-  {
-    title: "Social Growth",
-    description: "Viral-ready social content pipelines, interactive media, and data-driven audience engagement.",
-    image: "/services_social.jpg",
-    icon: Share2,
-  },
-  {
-    title: "Cinematic Video",
-    description: "Full-suite commercial video production, premium color grading, and anamorphic 4K visuals.",
-    image: "/services_video.jpg",
-    icon: Video,
-  },
-  {
-    title: "Partner with Us",
-    description: "Ready to scale your influence? Let's engineer market authority and brand gravity together.",
-    image: "/philosophy_portrait.jpg",
-    icon: Sparkles,
-    isCTA: true,
-  },
-];
+import React from 'react';
+import { motion } from 'framer-motion';
+import CarouselStacked, { defaultSlides } from '@/components/ui/carousel-07';
 
 export default function Services() {
-  const handleCTAClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const element = document.getElementById("contact");
-    if (element) {
-      const lenis = (window as any).lenis;
-      if (lenis) {
-        lenis.scrollTo(element, { offset: -80, duration: 1.5 });
-      } else {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  };
-
   return (
     <section
       id="services"
-      className="w-full bg-background flex items-center justify-center overflow-hidden border-t border-white/5 py-12 md:py-24 relative z-20"
+      className="relative w-full bg-[#050505] text-white pt-16 sm:pt-24 md:pt-32 pb-24 sm:pb-32 md:pb-40 lg:pb-48 overflow-hidden border-t border-white/5 z-20 select-none flex flex-col items-center justify-center"
     >
-      <ContainerScroll
-        titleComponent={
-          <div className="flex flex-col items-center justify-center text-center px-4 mb-4 md:mb-8">
-            <span className="text-accent font-satoshi text-xs md:text-sm tracking-[0.4em] uppercase font-bold block mb-3">
+      {/* Centered Ambient Background Lighting */}
+      <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[320px] sm:w-[550px] md:w-[700px] h-[220px] sm:h-[320px] bg-accent/5 rounded-full blur-[100px] sm:blur-[150px] -z-10" />
+
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+        
+        {/* Section Header: Perfectly Centered for ALL device sizes */}
+        <div className="flex flex-col items-center text-center mb-6 sm:mb-8 md:mb-10 max-w-3xl px-2">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-3 sm:mb-4"
+          >
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+            <span className="text-[11px] sm:text-xs font-mono font-bold tracking-[0.2em] text-accent uppercase">
               What We Offer
             </span>
-            <h2 className="text-3xl md:text-6xl lg:text-7xl font-black uppercase text-foreground tracking-tight leading-none mb-4 md:mb-6">
-              Our Creative Services <br />
-              <span className="text-accent text-4xl md:text-7xl lg:text-8xl mt-2 block font-extrabold">
-                Command Gravity
-              </span>
-            </h2>
-          </div>
-        }
-      >
-        <div className="h-full w-full bg-surface p-3 md:p-6 rounded-2xl md:overflow-y-auto scrollbar-none">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 h-full">
-            {servicesList.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <div
-                  key={service.title}
-                  className={`relative group overflow-hidden rounded-xl border border-white/5 bg-card/60 flex flex-col justify-start transition-all duration-500 hover:border-accent/40 w-full h-full min-h-[200px] sm:min-h-0 ${
-                    service.isCTA ? 'bg-accent/5 border-accent/20' : ''
-                  }`}
-                >
-                  {/* Background image */}
-                  <div className="absolute inset-0 z-0 select-none pointer-events-none">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    />
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/75 to-black/40 z-10" />
-                  </div>
+          </motion.div>
 
-                  {/* Content Wrapper with padding inside to guarantee alignment and prevent clipping */}
-                  <div className="relative z-20 flex flex-col gap-4 w-full h-full justify-start items-start text-left p-6 md:p-8">
-                    {/* Clean icon aligned directly with the text left border */}
-                    <div className="text-accent group-hover:text-foreground transition-colors duration-300">
-                      <Icon size={28} />
-                    </div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-satoshi uppercase tracking-tight text-white leading-tight text-center"
+          >
+            Our Creative Services <br className="hidden sm:inline" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-red-500 to-orange-400">
+              Command Gravity
+            </span>
+          </motion.h2>
 
-                    <div className="flex flex-col gap-2 w-full mt-1">
-                      <h3 className="font-satoshi font-black text-base md:text-lg uppercase tracking-wider text-white select-none">
-                        {service.title}
-                      </h3>
-                      <p className="text-[12px] md:text-sm text-white/70 leading-relaxed group-hover:text-foreground/90 transition-colors duration-300 select-none">
-                        {service.description}
-                      </p>
-                    </div>
-
-                    {service.isCTA && (
-                      <div className="mt-auto pt-4">
-                        <a
-                          href="#contact"
-                          onClick={handleCTAClick}
-                          className="inline-flex items-center gap-2 px-4 py-2 bg-accent hover:bg-white hover:text-black text-foreground font-satoshi text-xs font-semibold uppercase tracking-wider rounded-full transition-all duration-300 cursor-pointer"
-                        >
-                          Get Started →
-                        </a>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-2.5 sm:mt-3 text-xs sm:text-sm md:text-base text-secondary max-w-lg mx-auto font-normal leading-relaxed text-center"
+          >
+            Drag, swipe, or use navigation controls to explore our strategic capabilities and creative systems.
+          </motion.p>
         </div>
-      </ContainerScroll>
+
+        {/* Responsive Stacked 3D Carousel */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="w-full flex justify-center items-center overflow-visible"
+        >
+          <CarouselStacked slides={defaultSlides} />
+        </motion.div>
+
+      </div>
     </section>
   );
 }

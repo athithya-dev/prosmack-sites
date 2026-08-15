@@ -1,201 +1,113 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Image from 'next/image';
-import Magnetic from '../Magnetic';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { CircularTestimonials, Testimonial } from '@/components/ui/circular-testimonials';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const projects = [
+const featuredTestimonials: Testimonial[] = [
   {
-    title: 'Apex Branding',
-    category: 'REBRAND / PRODUCT ARCHITECTURE',
-    description: 'A complete brand ecosystem overhaul for a next-generation technology unicorn. We restructured their visual guidelines, developed custom design systems, and launched their flagship platform.',
-    results: [
-      { label: 'Brand Equity', value: '+140%' },
-      { label: 'Views Generated', value: '18M+' },
-      { label: 'Platform Conversion', value: '+35%' },
-    ],
-    img: '/project_apex.jpg',
+    name: 'IRCTC',
+    designation: 'Official Digital Promotion Partner',
+    quote: 'We are an official digital promotion partner for IRCTC, managing digital media advertising, promotional campaigns, and online brand communication to enhance audience reach and engagement.',
+    src: '/IRCTC.jpg',
   },
   {
-    title: 'Luxe Chrono',
-    category: 'CAMPAIGN / VIDEO DIRECTION',
-    description: 'An ultra-exclusive product release campaign for a heritage watchmaker. Our cinematic brand film and immersive storytelling generated high-intent demand worldwide.',
-    results: [
-      { label: 'Sell Out Time', value: '4 Mins' },
-      { label: 'Total Revenue', value: '$4.2M' },
-      { label: 'Social Engagement', value: '+280%' },
-    ],
-    img: '/project_luxe.jpg',
+    name: 'Tamil Nadu Tourism (TTDC)',
+    designation: 'Digital Promotions & Social Strategy',
+    quote: 'We have partnered with TTDC to drive social media and digital promotions, strengthening tourism communication and creating engaging digital campaigns to reach wider audiences.',
+    src: '/th.jpg',
   },
   {
-    title: 'Futura Network',
-    category: 'DIGITAL EXPERIENCE / UI SYSTEM',
-    description: 'Designing the interactive landscape for a revolutionary personal productivity application. We crafted every micro-interaction to feel weightless and responsive.',
-    results: [
-      { label: 'Store Downloads', value: '1.2M' },
-      { label: 'App Store Rank', value: '#1' },
-      { label: 'User Retention', value: '72%' },
-    ],
-    img: '/project_futura.jpg',
+    name: 'Tata Motors – Tata Hexa Launch',
+    designation: 'Automotive Launch & Strategic Campaigns',
+    quote: 'We supported Tata Motors during the launch of the Tata Hexa, managing digital promotions and strategic campaign initiatives to build awareness, engagement, and market visibility.',
+    src: '/OIP (1).jpg',
+  },
+  {
+    name: 'SBI Home Loans',
+    designation: 'Campaigns Across 2019, 2021 & 2022',
+    quote: 'We have successfully managed digital promotional campaigns for SBI Home Loans across 2019, 2021, and 2022, supporting their digital outreach and campaign communication.',
+    src: '/sbi-1518665988.jpg',
   },
 ];
 
 export default function FeaturedWork() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const slidesRef = useRef<HTMLDivElement[]>([]);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const slides = slidesRef.current;
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 1.2,
-        pin: true,
-        anticipatePin: 1,
-      },
-    });
-
-    // We animate the transitions between slides
-    slides.forEach((slide, index) => {
-      if (index === 0) return; // First slide is already visible
-
-      const prevSlide = slides[index - 1];
-      const image = slide.querySelector('.project-image');
-      const textElements = slide.querySelectorAll('.slide-animate');
-
-      // Initialize slide 2 and 3 clip-path (hidden below)
-      gsap.set(slide, {
-        clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
-      });
-      gsap.set(image, { scale: 1.2, y: 100 });
-      gsap.set(textElements, { opacity: 0, y: 50 });
-
-      // Slide Wipe Transition
-      tl.to(slide, {
-        clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-        duration: 1.5,
-        ease: 'power3.inOut',
-      }, `slide-${index}`)
-      
-      // Parallel parallax zoom on image
-      .to(image, {
-        scale: 1,
-        y: 0,
-        duration: 1.6,
-        ease: 'power3.out',
-      }, `slide-${index}`)
-
-      // Parallel parallax shift on previous slide's content
-      .to(prevSlide.querySelector('.project-image'), {
-        y: -100,
-        scale: 0.9,
-        opacity: 0.3,
-        duration: 1.5,
-        ease: 'power3.inOut',
-      }, `slide-${index}`)
-
-      // Fade-in text for current slide
-      .to(textElements, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.1,
-        duration: 1,
-        ease: 'power3.out',
-      }, `slide-${index}+=0.5`);
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.trigger === container) {
-          trigger.kill();
-        }
-      });
-    };
-  }, []);
-
   return (
     <section
-      ref={containerRef}
       id="featured-work"
-      className="relative w-full h-[300vh] bg-background"
+      className="relative w-full bg-[#050505] text-white pt-20 sm:pt-28 md:pt-36 lg:pt-44 pb-20 sm:pb-28 md:pb-36 overflow-hidden border-t border-white/5 z-20 select-none flex flex-col items-center justify-center"
     >
-      <div className="sticky top-0 w-full h-screen overflow-hidden">
-        {projects.map((project, index) => (
-          <div
-            key={project.title}
-            ref={(el) => {
-              if (el) slidesRef.current[index] = el;
-            }}
-            className="absolute inset-0 w-full h-full flex flex-col justify-end bg-background transform-gpu"
-            style={{ zIndex: index + 10 }}
+      {/* Centered Ambient Lighting */}
+      <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-accent/5 rounded-full blur-[160px] -z-10" />
+
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+        
+        {/* Perfectly Centered Header */}
+        <div className="flex flex-col items-center text-center mb-8 sm:mb-12 max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-4"
           >
-            {/* Absolute Background Image Layer */}
-            <div className="absolute inset-0 w-full h-full z-0">
-              <Image
-                src={project.img}
-                alt={project.title}
-                fill
-                priority={index === 0}
-                className="project-image object-cover transform-gpu"
-                sizes="100vw"
-              />
-              {/* Dark editorial overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/25 z-10" />
-            </div>
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+            <span className="text-xs font-mono font-bold tracking-[0.2em] text-accent uppercase">
+              Featured Case Studies
+            </span>
+          </motion.div>
 
-            {/* Content Layer */}
-            <div className="relative w-full max-w-7xl mx-auto px-6 md:px-16 pb-8 sm:pb-16 md:pb-24 z-20 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-end">
-              {/* Left Column: Title and details */}
-              <div className="lg:col-span-7 flex flex-col items-start gap-3 md:gap-4">
-                <span className="slide-animate font-satoshi text-xs md:text-sm tracking-[0.4em] text-accent uppercase font-bold">
-                  {project.category}
-                </span>
-                
-                <h3 className="slide-animate font-satoshi font-black text-3xl sm:text-5xl md:text-8xl tracking-tight text-white uppercase leading-none">
-                  {project.title}
-                </h3>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-satoshi uppercase tracking-tight text-white leading-tight text-center"
+          >
+            Client Impact & <br className="hidden sm:inline" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-red-500 to-orange-400">
+              Brand Dominance
+            </span>
+          </motion.h2>
 
-                <p className="slide-animate text-white/70 text-[12px] sm:text-sm md:text-base leading-relaxed max-w-lg mt-1 md:mt-2">
-                  {project.description}
-                </p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-3 text-xs sm:text-base text-secondary max-w-lg mx-auto font-normal leading-relaxed text-center"
+          >
+            Proven institutional campaigns and brand growth engineered for India&apos;s leading enterprises and public sector icons.
+          </motion.p>
+        </div>
 
-                <div className="slide-animate mt-3 md:mt-4">
-                  <Magnetic range={40}>
-                    <a
-                      href="#contact"
-                      className="px-6 py-3 sm:px-8 sm:py-3.5 bg-white text-black font-satoshi text-xs font-semibold uppercase tracking-widest rounded-full hover:bg-accent hover:text-foreground hover:shadow-[0_0_20px_rgba(234,13,35,0.4)] transition-all duration-300"
-                    >
-                      View Case Study
-                    </a>
-                  </Magnetic>
-                </div>
-              </div>
+        {/* Centered Circular Showcase Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="w-full rounded-3xl border border-white/10 bg-[#0d0d0d]/90 backdrop-blur-xl p-5 sm:p-8 md:p-12 shadow-2xl flex items-center justify-center"
+        >
+          <CircularTestimonials
+            testimonials={featuredTestimonials}
+            autoplay={true}
+            colors={{
+              name: "#ffffff",
+              designation: "#ea0d23",
+              testimony: "#a1a1aa",
+              arrowBackground: "rgba(255, 255, 255, 0.06)",
+              arrowForeground: "#ffffff",
+              arrowHoverBackground: "#ea0d23",
+            }}
+            fontSizes={{
+              name: "clamp(1.15rem, 2vw, 1.75rem)",
+              designation: "0.75rem",
+              quote: "clamp(0.85rem, 1.3vw, 1rem)",
+            }}
+          />
+        </motion.div>
 
-              {/* Right Column: Performance Results metrics */}
-              <div className="lg:col-span-5 grid grid-cols-3 gap-4 border-t border-white/10 pt-6 lg:border-t-0 lg:pt-0">
-                {project.results.map((res) => (
-                  <div key={res.label} className="slide-animate flex flex-col">
-                    <span className="font-satoshi font-black text-xl sm:text-2xl md:text-4xl text-white">
-                      {res.value}
-                    </span>
-                    <span className="text-[9px] sm:text-[10px] tracking-wider text-white/50 uppercase mt-1">
-                      {res.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
       </div>
     </section>
   );

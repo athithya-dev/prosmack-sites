@@ -15,7 +15,6 @@ import FeaturedWork from '@/components/Sections/FeaturedWork';
 import HorizontalExperience from '@/components/Sections/HorizontalExperience';
 import BrandPhilosophy from '@/components/Sections/BrandPhilosophy';
 import Process from '@/components/Sections/Process';
-import Statistics from '@/components/Sections/Statistics';
 import Testimonials from '@/components/Sections/Testimonials';
 import FAQ from '@/components/Sections/FAQ';
 import Contact from '@/components/Sections/Contact';
@@ -67,13 +66,12 @@ export default function Home() {
             <HorizontalExperience />
             <BrandPhilosophy />
             <Process />
-            <Statistics />
             <Testimonials />
             <FAQ />
             <Contact />
           </main>
 
-          {/* Footer */}
+          {/* Animated PROSMACK Footer */}
           <Footer />
         </div>
       </SmoothScroll>

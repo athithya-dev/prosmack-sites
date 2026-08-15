@@ -86,7 +86,8 @@ export default function Navbar() {
                 width={140}
                 height={32}
                 priority
-                className="object-contain transition-transform duration-300 hover:scale-105"
+                className="h-8 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                style={{ width: 'auto', height: 'auto' }}
               />
             </a>
           </Magnetic>

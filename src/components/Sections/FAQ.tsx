@@ -30,52 +30,61 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative w-full bg-background py-24 md:py-32 border-t border-white/5">
-      <div className="max-w-4xl mx-auto px-6 md:px-16">
+    <section
+      id="faq"
+      className="relative w-full bg-background py-14 sm:py-24 md:py-32 border-t border-foreground/10 flex flex-col items-center justify-center text-center overflow-hidden"
+    >
+      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-12 flex flex-col items-center justify-center">
         
-        {/* Header */}
-        <div className="mb-16 text-center md:text-left">
-          <span className="text-accent font-satoshi text-xs md:text-sm tracking-[0.4em] uppercase font-bold block mb-4">
-            Information
-          </span>
-          <h2 className="font-satoshi font-black text-4xl md:text-7xl text-foreground uppercase tracking-tight">
-            FAQs.
+        {/* Header — Centered for all devices with minimized mobile typography */}
+        <div className="mb-8 sm:mb-12 md:mb-14 flex flex-col items-center text-center max-w-2xl mx-auto px-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-foreground/10 bg-foreground/[0.03] backdrop-blur-md mb-3 sm:mb-4">
+            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-accent animate-pulse" />
+            <span className="text-[10px] sm:text-[11px] font-satoshi font-bold tracking-[0.25em] uppercase text-secondary">
+              Information & FAQ
+            </span>
+          </div>
+          
+          <h2 className="font-satoshi font-black text-2xl xs:text-3xl sm:text-5xl md:text-6xl text-foreground uppercase tracking-tight leading-tight text-center">
+            Frequently Asked <span className="text-accent">Questions</span>
           </h2>
         </div>
 
-        {/* Accordion Group */}
-        <div className="flex flex-col border-t border-white/10">
+        {/* Accordion Group — Centered & Optimized Typography for Mobile */}
+        <div className="w-full max-w-3xl mx-auto flex flex-col border-t border-foreground/10">
           {faqs.map((faq, index) => {
             const isOpen = activeIndex === index;
 
             return (
               <div
                 key={faq.q}
-                className="border-b border-white/10 py-6 md:py-8 flex flex-col"
+                className="border-b border-foreground/10 py-4 sm:py-6 md:py-8 flex flex-col transition-colors duration-200"
               >
-                {/* Accordion Button trigger */}
+                {/* Accordion Trigger */}
                 <button
+                  type="button"
                   onClick={() => toggleFAQ(index)}
-                  className="w-full flex justify-between items-center text-left text-foreground group outline-none cursor-default"
+                  className="w-full flex justify-between items-center text-left sm:text-left text-foreground group outline-none cursor-pointer gap-3 sm:gap-4"
                 >
-                  <h3 className="font-satoshi text-lg md:text-xl font-bold uppercase tracking-wide group-hover:text-accent transition-colors duration-300">
+                  <h3 className="font-satoshi text-xs xs:text-sm sm:text-base md:text-lg font-bold uppercase tracking-tight sm:tracking-wide group-hover:text-accent transition-colors duration-300 leading-snug">
                     {faq.q}
                   </h3>
 
-                  {/* Rotatable plus/minus icon */}
-                  <div className="ml-4 flex items-center justify-center w-8 h-8 rounded-full border border-white/10 group-hover:border-accent group-hover:bg-accent/5 transition-all duration-300">
+                  {/* Plus/minus rotatable indicator */}
+                  <div className="ml-2 sm:ml-4 flex-shrink-0 flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-full border border-foreground/15 group-hover:border-accent group-hover:bg-accent/10 transition-all duration-300">
                     <motion.svg
-                      width="12"
-                      height="12"
+                      width="10"
+                      height="10"
                       viewBox="0 0 12 12"
                       fill="none"
                       animate={{ rotate: isOpen ? 135 : 0 }}
                       transition={{ duration: 0.35, ease: 'easeOut' }}
+                      className="sm:w-3 sm:h-3"
                     >
                       <path
                         d="M6 1V11M1 6H11"
                         stroke="currentColor"
-                        strokeWidth="1.5"
+                        strokeWidth="1.75"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
@@ -83,16 +92,16 @@ export default function FAQ() {
                   </div>
                 </button>
 
-                {/* Smooth Expandable Answer */}
+                {/* Expandable Answer */}
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
                       initial={{ height: 0, opacity: 0, marginTop: 0 }}
                       animate={{
                         height: 'auto',
-                        opacity: 0.7,
-                        marginTop: 16,
-                        transition: { height: { duration: 0.4, ease: 'easeOut' }, opacity: { duration: 0.3 } },
+                        opacity: 0.85,
+                        marginTop: 10,
+                        transition: { height: { duration: 0.35, ease: 'easeOut' }, opacity: { duration: 0.25 } },
                       }}
                       exit={{
                         height: 0,
@@ -100,7 +109,7 @@ export default function FAQ() {
                         marginTop: 0,
                         transition: { height: { duration: 0.3, ease: 'easeIn' }, opacity: { duration: 0.2 } },
                       }}
-                      className="overflow-hidden pr-8 text-secondary text-sm md:text-base leading-relaxed"
+                      className="overflow-hidden text-left pr-2 sm:pr-8 text-secondary text-xs sm:text-sm md:text-base leading-relaxed font-normal"
                     >
                       {faq.a}
                     </motion.div>
@@ -110,6 +119,7 @@ export default function FAQ() {
             );
           })}
         </div>
+
       </div>
     </section>
   );

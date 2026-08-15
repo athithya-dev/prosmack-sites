@@ -119,6 +119,7 @@ function DockNavItemIcon({
         height={64}
         src={iconSrc}
         width={64}
+        style={{ width: "auto", height: "auto" }}
       />
     );
   }

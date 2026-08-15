@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { getAssetPath } from "@/lib/utils";
 
 export interface GalleryPhoto {
   id: string | number;
@@ -105,7 +106,7 @@ export function InteractiveFolderGallery({
                   whileDrag={isFolderOpen ? { scale: openScale + 0.1, rotate: 5, zIndex: 150 } : {}}
                   transition={{ type: "spring", stiffness: 350, damping: 30 }}
                 >
-                  <img src={photo.image} alt="Gallery item" className="w-full h-full object-cover pointer-events-none" />
+                  <img src={getAssetPath(photo.image)} alt="Gallery item" className="w-full h-full object-cover pointer-events-none" />
                 </motion.div>
               );
             })}

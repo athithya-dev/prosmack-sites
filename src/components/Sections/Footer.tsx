@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import Magnetic from '../Magnetic';
 
 export default function Footer() {
   const footerRef = useRef<HTMLDivElement>(null);
@@ -22,7 +21,7 @@ export default function Footer() {
       gsap.to(pos, {
         x: targetX,
         y: targetY,
-        duration: 0.7,
+        duration: 0.6,
         ease: 'power3.out',
         onUpdate: () => {
           footer.style.setProperty('--footer-mouse-x', `${pos.x}px`);
@@ -35,81 +34,27 @@ export default function Footer() {
     return () => footer.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const socialLinks = [
-    { label: 'Instagram', href: '#' },
-    { label: 'LinkedIn', href: '#' },
-    { label: 'Twitter', href: '#' },
-    { label: 'Dribbble', href: '#' },
-  ];
-
   return (
     <footer
       ref={footerRef}
-      className="relative w-full bg-white text-[#050505] pt-24 pb-12 px-6 md:px-16 overflow-hidden border-t border-black/5 select-none"
-      style={{
-        color: '#050505',
-      }}
+      className="relative w-full bg-background text-foreground pt-12 pb-32 sm:pb-36 px-6 sm:px-8 md:px-16 overflow-hidden select-none"
     >
-      <div className="max-w-7xl mx-auto w-full flex flex-col justify-between h-full z-10 relative">
-        {/* Top footer row: Responsive Navigation Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-8 mb-16 border-b border-black/10 pb-16">
-          <div className="flex flex-col gap-4">
-            <span className="text-[10px] tracking-widest text-black/50 uppercase font-semibold">
-              Explore
-            </span>
-            <div className="flex flex-col gap-2">
-              {['Services', 'Featured Work', 'Philosophy', 'Process'].map((link) => (
-                <Magnetic key={link} range={20}>
-                  <a
-                    href={`#${link.toLowerCase().replace(' ', '-')}`}
-                    className="inline-block text-sm font-semibold hover:text-accent transition-colors duration-300 w-fit"
-                  >
-                    {link}
-                  </a>
-                </Magnetic>
-              ))}
-            </div>
-          </div>
+      {/* Centered Ambient Lighting */}
+      <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/5 rounded-full blur-[180px] -z-10" />
 
-          <div className="flex flex-col gap-4">
-            <span className="text-[10px] tracking-widest text-black/50 uppercase font-semibold">
-              Social Links
-            </span>
-            <div className="flex flex-col gap-2">
-              {socialLinks.map((link) => (
-                <Magnetic key={link.label} range={20}>
-                  <a
-                    href={link.href}
-                    className="inline-block text-sm font-semibold hover:text-accent transition-colors duration-300 w-fit"
-                  >
-                    {link.label}
-                  </a>
-                </Magnetic>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:col-span-2 gap-4 md:items-end md:text-right">
-            <span className="text-[10px] tracking-widest text-black/50 uppercase font-semibold">
-              The Manifesto
-            </span>
-            <p className="text-sm leading-relaxed text-black/75 max-w-sm md:text-right">
-              We design digital products and experiences that help elite brands command attention and capture authority.
-            </p>
-          </div>
-        </div>
-
-        {/* Mid-Row: Interactive Gigantic Outlined Watermark with Mouse Spotlight */}
+      <div className="max-w-7xl mx-auto w-full flex flex-col items-center justify-center relative z-10">
+        
+        {/* Animated Spotlight "PROSMACK" Element */}
         <div
           ref={textRef}
-          className="relative w-full h-[18vw] flex justify-center items-center overflow-hidden my-8 cursor-default"
+          className="relative w-full h-[18vw] min-h-[120px] max-h-[260px] flex justify-center items-center overflow-hidden cursor-default my-4"
         >
-          {/* Base Layer: Outlined Text */}
+          {/* Base Layer: Outlined Typography (adapts to light/dark themes) */}
           <div className="absolute inset-0 flex justify-center items-center">
             <h4
-              className="font-satoshi font-black text-[17vw] tracking-tighter uppercase leading-none select-none"
+              className="font-satoshi font-black text-[18vw] tracking-tighter uppercase leading-none select-none opacity-20"
               style={{
-                WebkitTextStroke: '2px rgba(5, 5, 5, 0.12)',
+                WebkitTextStroke: '2px var(--color-foreground, currentColor)',
                 color: 'transparent',
               }}
             >
@@ -117,17 +62,17 @@ export default function Footer() {
             </h4>
           </div>
 
-          {/* Mask Layer: Filled/Illuminated Text revealed by mouse circle */}
+          {/* Mask Layer: Illuminated Spotlight revealing glowing signature red text */}
           <div
             className="absolute inset-0 flex justify-center items-center pointer-events-none transition-all duration-75"
             style={{
-              clipPath: 'circle(160px at var(--footer-mouse-x, -500px) var(--footer-mouse-y, -500px))',
+              clipPath: 'circle(180px at var(--footer-mouse-x, -500px) var(--footer-mouse-y, -500px))',
             }}
           >
             <h4
-              className="font-satoshi font-black text-[17vw] tracking-tighter uppercase leading-none select-none text-accent"
+              className="font-satoshi font-black text-[18vw] tracking-tighter uppercase leading-none select-none text-accent"
               style={{
-                textShadow: '0 0 40px rgba(234, 13, 35, 0.3)',
+                textShadow: '0 0 60px rgba(234, 13, 35, 0.5)',
               }}
             >
               PROSMACK
@@ -135,18 +80,19 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Metadata */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 border-t border-black/10 pt-8 text-[11px] text-black/60 font-medium">
+        {/* Minimal Copyright Metadata */}
+        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-foreground/10 text-xs text-secondary font-medium">
           <span>© {new Date().getFullYear()} PROSMACK agency. All rights reserved.</span>
           <div className="flex gap-6">
-            <a href="#" className="inline-block hover:text-accent transition-colors duration-300">
+            <a href="#" className="hover:text-accent transition-colors duration-300">
               Privacy Policy
             </a>
-            <a href="#" className="inline-block hover:text-accent transition-colors duration-300">
+            <a href="#" className="hover:text-accent transition-colors duration-300">
               Terms of Use
             </a>
           </div>
         </div>
+
       </div>
     </footer>
   );
