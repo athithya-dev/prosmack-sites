@@ -8,8 +8,9 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative w-full bg-[#050505] text-white pt-16 sm:pt-24 md:pt-32 pb-24 sm:pb-32 md:pb-40 lg:pb-48 overflow-hidden border-t border-white/5 z-20 select-none flex flex-col items-center justify-center"
+      className="relative w-full bg-[#050505] text-white py-16 sm:py-24 md:py-28 overflow-hidden border-t border-white/5 z-20 select-none flex flex-col items-center justify-center"
     >
+
       {/* Centered Ambient Background Lighting */}
       <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[320px] sm:w-[550px] md:w-[700px] h-[220px] sm:h-[320px] bg-accent/5 rounded-full blur-[100px] sm:blur-[150px] -z-10" />
 

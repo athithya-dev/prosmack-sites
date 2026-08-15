@@ -9,8 +9,9 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative w-full bg-background text-foreground py-24 sm:py-32 md:py-36 px-6 sm:px-8 md:px-12 flex flex-col items-center justify-center border-t border-foreground/10 overflow-hidden text-center"
+      className="relative w-full bg-background text-foreground py-16 sm:py-24 md:py-28 px-5 sm:px-8 md:px-12 flex flex-col items-center justify-center border-t border-foreground/10 overflow-hidden text-center"
     >
+
       {/* Ambient center glow */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-accent/5 rounded-full blur-[160px] -z-10" />
 

@@ -8,8 +8,9 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative w-full bg-[#050505] text-white py-24 sm:py-32 md:py-40 border-t border-white/5 z-20 overflow-hidden select-none flex flex-col items-center justify-center"
+      className="relative w-full bg-[#050505] text-white py-16 sm:py-24 md:py-28 border-t border-white/5 z-20 overflow-hidden select-none flex flex-col items-center justify-center"
     >
+
       {/* Centered Ambient Background Lighting */}
       <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-accent/5 rounded-full blur-[180px] -z-10" />
 
