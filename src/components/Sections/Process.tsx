@@ -49,81 +49,127 @@ export default function Process() {
     const progressBar = progressBarRef.current;
     if (!container || !progressBar) return;
 
-    // Create Master timeline for process transitions
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 1.1,
-        pin: true,
-        anticipatePin: 1,
-      },
-    });
+    const mm = gsap.matchMedia();
 
-    // 1. Animate the progress line scaleY directly with scroll
-    tl.to(progressBar, {
-      scaleY: 1,
-      ease: 'none',
-      duration: 5,
-    }, 0);
+    mm.add('(min-width: 768px)', () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 1.0,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
 
-    // 2. Animate step contents showing up and fading out
-    processSteps.forEach((step, index) => {
-      const stepEl = stepsRef.current[index];
-      if (!stepEl) return;
+      tl.to(progressBar, {
+        scaleY: 1,
+        ease: 'none',
+        duration: 5,
+      }, 0);
 
-      const number = stepEl.querySelector('.process-num');
-      const title = stepEl.querySelector('.process-title');
-      const tagline = stepEl.querySelector('.process-tagline');
-      const desc = stepEl.querySelector('.process-desc');
+      processSteps.forEach((step, index) => {
+        const stepEl = stepsRef.current[index];
+        if (!stepEl) return;
 
-      // Set initial values
-      if (index > 0) {
-        gsap.set([number, title, tagline, desc], { opacity: 0, y: 50, filter: 'blur(10px)' });
-      }
+        const number = stepEl.querySelector('.process-num');
+        const title = stepEl.querySelector('.process-title');
+        const tagline = stepEl.querySelector('.process-tagline');
+        const desc = stepEl.querySelector('.process-desc');
 
-      // Enter state timing (starts relative to scroll depth)
-      if (index > 0) {
-        tl.to([number, title, tagline, desc], {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          stagger: 0.08,
-          duration: 0.8,
-          ease: 'power3.out',
-        }, index - 0.2); // slight overlap
-      }
+        if (index > 0) {
+          gsap.set([number, title, tagline, desc], { opacity: 0, y: 50, filter: 'blur(10px)' });
+        }
 
-      // Exit state timing (unless it is the final step)
-      if (index < processSteps.length - 1) {
-        tl.to([number, title, tagline, desc], {
-          opacity: 0,
-          y: -50,
-          filter: 'blur(10px)',
-          stagger: 0.05,
-          duration: 0.8,
-          ease: 'power3.in',
-        }, index + 0.5);
-      }
-    });
+        if (index > 0) {
+          tl.to([number, title, tagline, desc], {
+            opacity: 1,
+            y: 0,
+            filter: 'blur(0px)',
+            stagger: 0.08,
+            duration: 0.8,
+            ease: 'power3.out',
+          }, index - 0.2);
+        }
 
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.trigger === container) {
-          trigger.kill();
+        if (index < processSteps.length - 1) {
+          tl.to([number, title, tagline, desc], {
+            opacity: 0,
+            y: -50,
+            filter: 'blur(10px)',
+            stagger: 0.05,
+            duration: 0.8,
+            ease: 'power3.in',
+          }, index + 0.5);
         }
       });
-    };
+    });
+
+    mm.add('(max-width: 767px)', () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 0.35,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
+
+      tl.to(progressBar, {
+        scaleY: 1,
+        ease: 'none',
+        duration: 5,
+      }, 0);
+
+      processSteps.forEach((step, index) => {
+        const stepEl = stepsRef.current[index];
+        if (!stepEl) return;
+
+        const number = stepEl.querySelector('.process-num');
+        const title = stepEl.querySelector('.process-title');
+        const tagline = stepEl.querySelector('.process-tagline');
+        const desc = stepEl.querySelector('.process-desc');
+
+        if (index > 0) {
+          gsap.set([number, title, tagline, desc], { opacity: 0, y: 35 });
+        }
+
+        if (index > 0) {
+          tl.to([number, title, tagline, desc], {
+            opacity: 1,
+            y: 0,
+            stagger: 0.04,
+            duration: 0.5,
+            ease: 'power2.out',
+          }, index - 0.15);
+        }
+
+        if (index < processSteps.length - 1) {
+          tl.to([number, title, tagline, desc], {
+            opacity: 0,
+            y: -35,
+            stagger: 0.03,
+            duration: 0.5,
+            ease: 'power2.in',
+          }, index + 0.45);
+        }
+      });
+    });
+
+    return () => mm.revert();
   }, []);
 
   return (
     <section
       ref={containerRef}
       id="process"
-      className="relative w-full h-[500vh] bg-background"
+      className="relative w-full h-[240vh] md:h-[450vh] bg-background"
     >
-      <div className="sticky top-0 w-full h-screen flex overflow-hidden">
+      <div className="sticky top-0 w-full h-[100dvh] flex overflow-hidden">
+
         {/* Left Side: Progress Indicator line */}
         <div className="hidden md:flex w-1/4 h-full flex-col justify-center items-center relative border-r border-white/5">
           <span className="text-secondary text-[10px] tracking-[0.3em] uppercase absolute top-16">

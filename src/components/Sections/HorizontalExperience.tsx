@@ -182,10 +182,10 @@ export default function HorizontalExperience() {
           {slides.map((slide, i) => (
             <div
               key={slide.num}
-              className="w-[85vw] sm:w-[70vw] flex-shrink-0 snap-center rounded-3xl bg-surface/90 border border-foreground/10 p-6 sm:p-8 flex flex-col justify-between min-h-[360px] relative overflow-hidden shadow-lg"
+              className="w-[88vw] sm:w-[72vw] flex-shrink-0 snap-center rounded-3xl bg-surface/95 border border-foreground/15 p-6 sm:p-8 flex flex-col justify-between min-h-[360px] relative overflow-hidden shadow-xl backdrop-blur-md"
             >
               {/* Subtle Card Background Number */}
-              <div className="absolute top-2 right-4 text-7xl sm:text-8xl font-black text-outline opacity-5 leading-none pointer-events-none">
+              <div className="absolute top-2 right-4 text-8xl font-black text-outline opacity-5 leading-none pointer-events-none">
                 {slide.num}
               </div>
 
@@ -214,21 +214,20 @@ export default function HorizontalExperience() {
                 </span>
               </div>
             </div>
-
           ))}
         </div>
 
         {/* Mobile Navigation Dots & Arrows */}
         <div className="flex items-center justify-between pt-4 mt-2">
-          <div className="flex gap-1.5 items-center">
+          <div className="flex gap-2 items-center">
             {slides.map((_, i) => (
               <button
                 key={i}
                 type="button"
                 onClick={() => scrollMobileTo(i)}
                 aria-label={`Slide ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === activeMobileIndex ? 'w-6 bg-accent' : 'w-2 bg-foreground/20'
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === activeMobileIndex ? 'w-8 bg-accent' : 'w-2.5 bg-foreground/20'
                 }`}
               />
             ))}
@@ -239,19 +238,19 @@ export default function HorizontalExperience() {
               type="button"
               onClick={() => scrollMobileTo(Math.max(0, activeMobileIndex - 1))}
               disabled={activeMobileIndex === 0}
-              aria-label="Previous slide"
-              className="w-8 h-8 rounded-full border border-foreground/10 flex items-center justify-center text-foreground disabled:opacity-30 disabled:pointer-events-none hover:border-accent hover:text-accent transition-colors"
+              aria-label="Previous Slide"
+              className="w-10 h-10 rounded-full border border-foreground/15 flex items-center justify-center text-foreground hover:border-accent hover:text-accent disabled:opacity-30 disabled:pointer-events-none active:scale-95 transition-all"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               type="button"
               onClick={() => scrollMobileTo(Math.min(slides.length - 1, activeMobileIndex + 1))}
               disabled={activeMobileIndex === slides.length - 1}
-              aria-label="Next slide"
-              className="w-8 h-8 rounded-full border border-foreground/10 flex items-center justify-center text-foreground disabled:opacity-30 disabled:pointer-events-none hover:border-accent hover:text-accent transition-colors"
+              aria-label="Next Slide"
+              className="w-10 h-10 rounded-full border border-foreground/15 flex items-center justify-center text-foreground hover:border-accent hover:text-accent disabled:opacity-30 disabled:pointer-events-none active:scale-95 transition-all"
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-5 h-5" />
             </button>
           </div>
         </div>

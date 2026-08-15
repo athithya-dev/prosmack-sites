@@ -80,44 +80,45 @@ export default function Contact() {
         </div>
 
         {/* Direct Contacts Row */}
-        <div className="w-full max-w-2xl mx-auto border-t border-foreground/10 pt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 text-center">
-          <div className="flex flex-col items-center justify-center gap-1.5">
-            <span className="text-[10px] tracking-widest uppercase font-semibold text-secondary">
+        <div className="w-full max-w-2xl mx-auto border-t border-foreground/10 pt-8 sm:pt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-6 text-center">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <span className="text-xs tracking-widest uppercase font-mono font-semibold text-secondary">
               Start a Conversation
             </span>
             <Magnetic range={25}>
               <a
                 href="mailto:hello@prosmack.com"
-                className="font-satoshi text-sm font-bold text-foreground underline decoration-accent underline-offset-4 hover:text-accent transition-colors duration-300"
+                className="font-satoshi text-base font-bold text-foreground underline decoration-accent underline-offset-4 hover:text-accent transition-colors duration-300 py-1"
               >
                 hello@prosmack.com
               </a>
             </Magnetic>
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-1.5">
-            <span className="text-[10px] tracking-widest uppercase font-semibold text-secondary">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <span className="text-xs tracking-widest uppercase font-mono font-semibold text-secondary">
               Call Direct
             </span>
             <Magnetic range={25}>
               <a
                 href="tel:+15550199239"
-                className="font-satoshi text-sm font-bold text-foreground underline decoration-accent underline-offset-4 hover:text-accent transition-colors duration-300"
+                className="font-satoshi text-base font-bold text-foreground underline decoration-accent underline-offset-4 hover:text-accent transition-colors duration-300 py-1"
               >
                 +1 (555) 019 9239
               </a>
             </Magnetic>
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-1.5">
-            <span className="text-[10px] tracking-widest uppercase font-semibold text-secondary">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <span className="text-xs tracking-widest uppercase font-mono font-semibold text-secondary">
               Studio Location
             </span>
-            <span className="font-satoshi text-sm font-bold text-foreground">
+            <span className="font-satoshi text-base font-bold text-foreground py-1">
               New York City / Remote
             </span>
           </div>
         </div>
+
 
       </div>
     </section>

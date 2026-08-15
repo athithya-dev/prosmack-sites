@@ -114,14 +114,14 @@ export default function BrandPhilosophy() {
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
             </div>
 
-            {/* Interactive Floating Words (Responsive sizes and bounded positions) */}
+            {/* Interactive Floating Words */}
             {philosophyWords.map((word, index) => (
               <div
                 key={word.text}
                 ref={(el) => {
                   if (el) wordsRef.current[index] = el;
                 }}
-                className="absolute font-satoshi font-black text-xs sm:text-base md:text-xl lg:text-2xl uppercase tracking-tight text-foreground cursor-default select-none transition-shadow duration-300 transform-gpu z-20 whitespace-nowrap"
+                className="absolute font-satoshi font-black text-xs xs:text-sm sm:text-base md:text-xl lg:text-2xl uppercase tracking-tight text-foreground bg-background/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-foreground/10 cursor-default select-none shadow-lg transform-gpu z-20 whitespace-nowrap"
                 style={{
                   top: word.top,
                   left: word.left,
@@ -130,6 +130,7 @@ export default function BrandPhilosophy() {
                 {word.text}
               </div>
             ))}
+
           </div>
         </div>
 
