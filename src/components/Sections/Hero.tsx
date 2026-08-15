@@ -60,14 +60,13 @@ export default function Hero() {
   }, []);
 
   return (
-
     <section
       ref={containerRef}
       id="hero"
-      className="relative w-full min-h-[100dvh] bg-background flex flex-col justify-center items-center px-5 sm:px-8 md:px-16 overflow-hidden text-center"
+      className="relative w-full min-h-[100dvh] bg-background flex flex-col justify-center items-start px-6 md:px-16 overflow-hidden"
       style={{
         color: 'var(--foreground)',
-        backgroundImage: 'radial-gradient(circle 550px at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--hero-gradient), transparent 80%)',
+        backgroundImage: 'radial-gradient(circle 450px at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--hero-gradient), transparent 80%)',
       }}
     >
       {/* Background Outlined Moving Typography */}
@@ -75,19 +74,19 @@ export default function Hero() {
         ref={bgTextRef}
         className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none select-none z-0"
       >
-        <h2 className="text-outline text-[14vw] sm:text-[12vw] md:text-[18vw] font-black tracking-tighter leading-none opacity-10 uppercase whitespace-nowrap">
+        <h2 className="text-outline text-[12vw] md:text-[18vw] font-black tracking-tighter leading-none opacity-10 uppercase whitespace-nowrap">
           PROSMACK
         </h2>
-        <h2 className="text-outline text-[12vw] sm:text-[10vw] md:text-[14vw] font-black tracking-widest leading-none opacity-5 uppercase whitespace-nowrap mt-3 sm:mt-4">
+        <h2 className="text-outline text-[10vw] md:text-[14vw] font-black tracking-widest leading-none opacity-5 uppercase whitespace-nowrap mt-4">
           REDEFINED
         </h2>
       </div>
 
-      {/* Hero Content (Centered on All Screen Sizes) */}
-      <div className="relative max-w-5xl mx-auto w-full z-10 py-12 sm:py-20 md:py-28 flex flex-col justify-center items-center text-center">
+      {/* Hero Content (Original Clean Editorial Layout) */}
+      <div className="relative max-w-7xl mx-auto w-full z-10 py-16 sm:py-20 md:py-28 flex flex-col justify-center">
         <h1
           ref={headlineRef}
-          className="font-satoshi font-black tracking-tight leading-[0.92] text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-[7.5vw] text-center uppercase flex flex-col justify-center items-center gap-2 sm:gap-3"
+          className="font-satoshi font-black tracking-tight leading-[0.92] text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-[8.5vw] text-left uppercase flex flex-col justify-start items-start gap-2 sm:gap-2.5"
         >
           <span className="hero-line block overflow-hidden transform-gpu text-foreground">
             Advertising.
@@ -99,29 +98,7 @@ export default function Hero() {
             Without Limits.
           </span>
         </h1>
-
-        {/* Mobile-First Centered Subtext */}
-        <p className="mt-6 sm:mt-8 text-secondary text-sm sm:text-base md:text-lg max-w-xl mx-auto font-normal leading-relaxed text-center">
-          We engineer cinematic advertising systems and high-authority brand ecosystems that capture attention and scale market gravity.
-        </p>
-
-        {/* Centered Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-3.5 mt-8 sm:mt-10">
-          <a
-            href="#featured-work"
-            className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-accent hover:bg-red-600 text-white font-satoshi font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-accent/25 active:scale-95 transition-all"
-          >
-            Featured Work
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-foreground/[0.05] hover:bg-foreground/[0.1] text-foreground border border-foreground/15 font-satoshi font-bold text-xs sm:text-sm uppercase tracking-wider backdrop-blur-md active:scale-95 transition-all"
-          >
-            Get In Touch
-          </a>
-        </div>
       </div>
     </section>
   );
 }
-
