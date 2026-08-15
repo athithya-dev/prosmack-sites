@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Magnetic from './Magnetic';
+import { getAssetPath } from '@/lib/utils';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -81,7 +82,7 @@ export default function Navbar() {
               aria-label="Home"
             >
               <Image
-                src="/logo.png"
+                src={getAssetPath("/logo.png")}
                 alt="ProSmack Logo"
                 width={140}
                 height={32}
@@ -89,6 +90,7 @@ export default function Navbar() {
                 className="h-8 w-auto object-contain transition-transform duration-300 hover:scale-105"
                 style={{ width: 'auto', height: 'auto' }}
               />
+
             </a>
           </Magnetic>
         </div>

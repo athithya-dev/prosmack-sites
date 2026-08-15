@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import Image from 'next/image';
+import { getAssetPath } from '@/lib/utils';
 
 const philosophyWords = [
   { text: 'Influence', top: '10%', left: '4%', speed: 1.2 },
@@ -103,12 +104,13 @@ export default function BrandPhilosophy() {
               className="relative w-[68%] aspect-[2/3] rounded-2xl overflow-hidden border border-foreground/10 shadow-2xl transform-gpu"
             >
               <Image
-                src="/philosophy_portrait.jpg"
+                src={getAssetPath("/philosophy_portrait.jpg")}
                 alt="Brand Philosophy Portrait"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 80vw, 35vw"
               />
+
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
             </div>
 

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useTransform, useSpring, useMotionValue } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { getAssetPath } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -60,10 +61,11 @@ function FlipCard({
                     style={{ backfaceVisibility: "hidden" }}
                 >
                     <img
-                        src={src}
+                        src={getAssetPath(src)}
                         alt={`hero-${index}`}
                         className="h-full w-full object-cover"
                     />
+
                     <div className="absolute inset-0 bg-background/10 transition-colors group-hover:bg-transparent" />
                 </div>
 
