@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn, getAssetPath } from "@/lib/utils";
 
@@ -232,7 +232,7 @@ export const CircularTestimonials = ({
                 onMouseLeave={() => setHoverPrev(false)}
                 aria-label="Previous case study"
               >
-                <FaArrowLeft size={13} color={colorArrowFg} />
+                <ArrowLeft size={14} color={colorArrowFg} />
               </button>
               <button
                 type="button"
@@ -245,7 +245,7 @@ export const CircularTestimonials = ({
                 onMouseLeave={() => setHoverNext(false)}
                 aria-label="Next case study"
               >
-                <FaArrowRight size={13} color={colorArrowFg} />
+                <ArrowRight size={14} color={colorArrowFg} />
               </button>
             </div>
 
