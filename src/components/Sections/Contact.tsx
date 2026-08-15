@@ -20,13 +20,13 @@ export default function Contact() {
         {/* Eyebrow Pill */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-foreground/10 bg-foreground/[0.03] backdrop-blur-md">
           <Sparkles className="w-3.5 h-3.5 text-accent animate-pulse" />
-          <span className="text-[11px] font-satoshi font-bold tracking-[0.25em] uppercase text-secondary">
+          <span className="text-xs sm:text-xs font-mono font-bold tracking-[0.2em] uppercase text-secondary">
             Next Phase & 1:1 Consulting
           </span>
         </div>
 
         {/* Cinematic Main Title */}
-        <h2 className="font-satoshi font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tight leading-[1.08] text-foreground text-center max-w-3xl mx-auto">
+        <h2 className="font-satoshi font-black text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tight leading-[1.08] text-foreground text-center max-w-3xl mx-auto">
           Ready to build something{' '}
           <span className="text-accent">unforgettable?</span>
         </h2>
@@ -38,31 +38,32 @@ export default function Contact() {
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
 
           {/* Card Body */}
-          <div className="flex flex-col items-center justify-center text-center gap-6 sm:gap-7 px-6 sm:px-12 py-10 sm:py-14 w-full">
+          <div className="flex flex-col items-center justify-center text-center gap-6 sm:gap-7 px-5 sm:px-12 py-8 sm:py-14 w-full">
             
             <h3 className="font-satoshi font-bold text-xl sm:text-2xl md:text-3xl tracking-tight text-foreground leading-snug max-w-lg mx-auto">
               Reach us for personal 1:1 consulting for your brand or product.
             </h3>
 
-            <p className="text-sm sm:text-base text-secondary leading-relaxed font-medium max-w-md mx-auto">
+            <p className="text-sm sm:text-base text-secondary leading-relaxed font-normal max-w-md mx-auto">
               Schedule a private strategy session with our creative and technical leadership. We'll audit your positioning, dissect your experience, and architect a customized growth roadmap.
             </p>
 
             {/* 3 Pillar Badges */}
-            <div className="flex flex-wrap justify-center items-center gap-3 w-full my-2">
-              <div className="inline-flex items-center gap-2 py-2.5 px-4 rounded-full bg-foreground/[0.04] border border-foreground/10 text-xs font-semibold text-foreground">
+            <div className="flex flex-wrap justify-center items-center gap-2.5 sm:gap-3 w-full my-2">
+              <div className="inline-flex items-center gap-2 py-2 px-3.5 sm:py-2.5 sm:px-4 rounded-full bg-foreground/[0.04] border border-foreground/10 text-xs sm:text-xs font-semibold text-foreground">
                 <Compass className="w-4 h-4 text-accent flex-shrink-0" />
                 <span>Brand Audit</span>
               </div>
-              <div className="inline-flex items-center gap-2 py-2.5 px-4 rounded-full bg-foreground/[0.04] border border-foreground/10 text-xs font-semibold text-foreground">
+              <div className="inline-flex items-center gap-2 py-2 px-3.5 sm:py-2.5 sm:px-4 rounded-full bg-foreground/[0.04] border border-foreground/10 text-xs sm:text-xs font-semibold text-foreground">
                 <ShieldCheck className="w-4 h-4 text-accent flex-shrink-0" />
                 <span>UX & Product</span>
               </div>
-              <div className="inline-flex items-center gap-2 py-2.5 px-4 rounded-full bg-foreground/[0.04] border border-foreground/10 text-xs font-semibold text-foreground">
+              <div className="inline-flex items-center gap-2 py-2 px-3.5 sm:py-2.5 sm:px-4 rounded-full bg-foreground/[0.04] border border-foreground/10 text-xs sm:text-xs font-semibold text-foreground">
                 <Rocket className="w-4 h-4 text-accent flex-shrink-0" />
                 <span>Scale Roadmap</span>
               </div>
             </div>
+
 
             {/* Flow Button (Isolated Row with Magnetic Effect) */}
             <div className="w-full flex justify-center items-center pt-2">

@@ -12,14 +12,17 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    const isTouch = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches;
+
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing function
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1.0,
-      touchMultiplier: 1.2,
+      touchMultiplier: 1.0,
+      autoResize: true,
     });
 
     lenisRef.current = lenis;
@@ -35,7 +38,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     };
     
     gsap.ticker.add(updateTicker);
-    gsap.ticker.lagSmoothing(0);
+    // Use responsive lag smoothing to prevent stutter on mobile frame drops
+    gsap.ticker.lagSmoothing(500, 33);
 
     // Expose lenis globally for utility scrolling if needed
     (window as any).lenis = lenis;
@@ -45,6 +49,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       gsap.ticker.remove(updateTicker);
     };
   }, []);
+
 
   return <>{children}</>;
 }

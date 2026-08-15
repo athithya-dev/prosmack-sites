@@ -152,7 +152,7 @@ export const StaggerTestimonials: React.FC<{ items?: StaggerTestimonialItem[] }>
 
                 {/* 2. Client Name below avatar */}
                 <h4 className={cn(
-                  "font-satoshi font-black text-base sm:text-xl tracking-tight leading-tight mt-3 text-center",
+                  "font-satoshi font-black text-lg sm:text-xl md:text-2xl tracking-tight leading-tight mt-3 text-center",
                   isCenter ? "text-white" : "text-white/80"
                 )}>
                   {testimonial.name}
@@ -168,8 +168,8 @@ export const StaggerTestimonials: React.FC<{ items?: StaggerTestimonialItem[] }>
                   </span>
                   {testimonial.tag && (
                     <>
-                      <span className="text-[10px] text-white/30">•</span>
-                      <span className="text-[11px] font-mono text-white/50 uppercase tracking-wider">
+                      <span className="text-xs text-white/30">•</span>
+                      <span className="text-xs font-mono text-white/60 uppercase tracking-wider">
                         {testimonial.tag}
                       </span>
                     </>
@@ -179,7 +179,7 @@ export const StaggerTestimonials: React.FC<{ items?: StaggerTestimonialItem[] }>
                 {/* 4. 5 Stars below designation */}
                 <div className="flex items-center justify-center gap-1.5 my-2.5 text-accent">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} className="fill-accent text-accent" />
+                    <Star key={i} size={15} className="fill-accent text-accent" />
                   ))}
                 </div>
               </div>
@@ -187,13 +187,14 @@ export const StaggerTestimonials: React.FC<{ items?: StaggerTestimonialItem[] }>
               {/* 5. Description / Quote below stars */}
               <div className="my-auto px-2">
                 <p className={cn(
-                  "font-general-sans text-xs sm:text-sm leading-relaxed text-center",
-                  isCenter ? "text-white/95 font-medium" : "text-white/60 line-clamp-4"
+                  "font-general-sans text-sm sm:text-base leading-relaxed text-center",
+                  isCenter ? "text-white/95 font-normal" : "text-white/60 line-clamp-4"
                 )}>
                   &ldquo;{testimonial.testimonial}&rdquo;
                 </p>
               </div>
             </motion.div>
+
           );
         })}
       </div>

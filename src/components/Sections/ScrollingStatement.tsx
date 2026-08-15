@@ -139,7 +139,7 @@ export default function ScrollingStatement() {
 
 
             {/* Huge Word */}
-            <h2 className="font-satoshi font-black text-[10vw] sm:text-[12vw] md:text-[14vw] tracking-tighter leading-none text-foreground text-center select-none uppercase flex flex-nowrap justify-center">
+            <h2 className="font-satoshi font-black text-4xl xs:text-5xl sm:text-7xl md:text-[12vw] lg:text-[14vw] tracking-tighter leading-none text-foreground text-center select-none uppercase flex flex-nowrap justify-center">
               {item.word.split('').map((char, charIndex) => (
                 <span
                   key={`${char}-${charIndex}`}
@@ -151,17 +151,18 @@ export default function ScrollingStatement() {
             </h2>
 
             {/* Subtext description */}
-            <p className="statement-desc text-secondary text-sm md:text-xl font-medium tracking-wide max-w-xl mt-6 opacity-60">
+            <p className="statement-desc text-secondary text-base sm:text-lg md:text-xl font-medium tracking-normal sm:tracking-wide max-w-xl mt-5 sm:mt-6 opacity-80 leading-relaxed px-2">
               {item.desc}
             </p>
 
             {/* Decorative arrow down */}
             {wordIndex < statements.length - 1 && (
-              <div className="absolute bottom-12 flex flex-col items-center gap-2 text-secondary opacity-50 text-[10px] tracking-[0.2em]">
+              <div className="absolute bottom-10 sm:bottom-12 flex flex-col items-center gap-1.5 text-secondary opacity-60 text-xs font-mono tracking-[0.2em]">
                 <span>SCROLL</span>
                 <span className="animate-bounce">↓</span>
               </div>
             )}
+
           </div>
         ))}
       </div>

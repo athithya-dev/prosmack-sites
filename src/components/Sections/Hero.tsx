@@ -99,12 +99,12 @@ export default function Hero() {
       </div>
 
       {/* Hero Content */}
-      <div className="relative max-w-7xl mx-auto w-full z-10 py-20 md:py-28 flex flex-col justify-center">
+      <div className="relative max-w-7xl mx-auto w-full z-10 py-16 sm:py-20 md:py-28 flex flex-col justify-center">
         <h1
           ref={headlineRef}
-          className="font-satoshi font-black tracking-tight leading-[0.9] text-[10vw] md:text-[8.5vw] text-left uppercase flex flex-col justify-start items-start gap-2"
+          className="font-satoshi font-black tracking-tight leading-[0.92] text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-[8.5vw] text-left uppercase flex flex-col justify-start items-start gap-1.5 sm:gap-2.5"
         >
-          <span className="hero-line block overflow-hidden transform-gpu">
+          <span className="hero-line block overflow-hidden transform-gpu text-white">
             Advertising.
           </span>
           <span className="hero-line block text-secondary overflow-hidden transform-gpu">
@@ -114,21 +114,20 @@ export default function Hero() {
             Without Limits.
           </span>
         </h1>
-
-
       </div>
 
       {/* Scroll indicator */}
       <div
         ref={scrollIndicatorRef}
-        className="absolute bottom-8 left-6 md:left-16 flex items-center gap-4 text-[10px] tracking-[0.25em] text-secondary uppercase z-10 cursor-default"
+        className="absolute bottom-6 sm:bottom-8 left-6 md:left-16 flex items-center gap-3 sm:gap-4 text-xs sm:text-xs tracking-[0.2em] text-secondary font-mono uppercase z-10 cursor-default"
       >
-        <span className="relative flex h-2 w-2">
+        <span className="relative flex h-2.5 w-2.5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span>
         </span>
         Scroll to discover
       </div>
     </section>
+
   );
 }

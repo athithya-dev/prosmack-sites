@@ -162,24 +162,25 @@ export default function Process() {
               }`}
             >
               {/* Massive Outline Number */}
-              <div className="process-num font-satoshi font-black text-[15vw] md:text-[10vw] text-outline-accent leading-none mb-4">
+              <div className="process-num font-satoshi font-black text-6xl sm:text-7xl md:text-[10vw] text-outline-accent leading-none mb-3 sm:mb-4">
                 {step.num}
               </div>
 
               <div className="max-w-2xl">
-                <span className="process-tagline text-xs md:text-sm tracking-[0.3em] text-secondary uppercase font-bold block mb-3">
+                <span className="process-tagline text-xs sm:text-sm tracking-[0.25em] text-secondary uppercase font-bold block mb-2.5 sm:mb-3 font-mono">
                   {step.tagline}
                 </span>
 
-                <h3 className="process-title font-satoshi font-black text-4xl md:text-7xl text-foreground uppercase tracking-tight leading-none mb-6">
+                <h3 className="process-title font-satoshi font-black text-4xl sm:text-5xl md:text-7xl text-foreground uppercase tracking-tight leading-none mb-4 sm:mb-6">
                   {step.title}
                 </h3>
 
-                <p className="process-desc text-secondary text-sm md:text-lg leading-relaxed max-w-xl">
+                <p className="process-desc text-secondary text-base sm:text-lg md:text-xl leading-relaxed max-w-xl font-normal">
                   {step.desc}
                 </p>
               </div>
             </div>
+
           ))}
         </div>
       </div>

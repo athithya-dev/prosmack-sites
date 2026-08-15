@@ -59,10 +59,10 @@ export default function Loader({ onComplete }: LoaderProps) {
 
   // Handle video playback, metadata loading, and safe fallback timeouts
   useEffect(() => {
-    // Initial generous fallback in case network completely stalls or video fails to load
+    // Fast safety fallback: on mobile or slow connection, transition after max 4.5s
     safetyTimerRef.current = setTimeout(() => {
       handleComplete();
-    }, 20000);
+    }, 4500);
 
     const video = videoRef.current;
     if (video) {
@@ -73,11 +73,11 @@ export default function Loader({ onComplete }: LoaderProps) {
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
-          // If browser strictly blocks un-gestured autoplay, give brief fallback window
+          // If browser strictly blocks un-gestured autoplay, transition quickly
           if (safetyTimerRef.current) clearTimeout(safetyTimerRef.current);
           safetyTimerRef.current = setTimeout(() => {
             handleComplete();
-          }, 3500);
+          }, 1500);
         });
       }
     }
@@ -92,17 +92,15 @@ export default function Loader({ onComplete }: LoaderProps) {
   const handleLoadedMetadata = (e: React.SyntheticEvent<HTMLVideoElement>) => {
     const duration = e.currentTarget.duration;
     if (duration && !isNaN(duration) && duration > 0) {
-      // Set safety timeout to slightly after the full video duration (e.g. duration + 3s buffer)
       if (safetyTimerRef.current) clearTimeout(safetyTimerRef.current);
       safetyTimerRef.current = setTimeout(() => {
         handleComplete();
-      }, (duration + 3) * 1000);
+      }, Math.min((duration + 1) * 1000, 6000));
     }
   };
 
   const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
     const video = e.currentTarget;
-    // If video is within 0.15s of ending, trigger clean finish
     if (video.duration && video.currentTime >= video.duration - 0.15) {
       handleComplete();
     }
@@ -111,15 +109,17 @@ export default function Loader({ onComplete }: LoaderProps) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 bg-[#050505] z-[99999] flex justify-center items-center select-none overflow-hidden"
+      onClick={handleComplete}
+      className="fixed inset-0 bg-[#050505] z-[99999] flex justify-center items-center select-none overflow-hidden cursor-pointer"
+      title="Click or tap anywhere to enter"
     >
-      {/* Edge-to-edge adaptive video player using native media query sources */}
+      {/* Edge-to-edge adaptive video player */}
       <video
         ref={videoRef}
         autoPlay
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         onEnded={handleComplete}
         onError={handleComplete}
         onLoadedMetadata={handleLoadedMetadata}
@@ -131,19 +131,27 @@ export default function Loader({ onComplete }: LoaderProps) {
         <source src={getAssetPath("/preloader.mp4")} type="video/mp4" />
       </video>
 
-      {/* Clean Skip Button for Both Mobile and Desktop */}
+      {/* Prominent Touch-Friendly Skip Button */}
       <div className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 z-30 pointer-events-auto">
         <button
           type="button"
-          onClick={handleComplete}
-          className="flex items-center justify-center gap-2.5 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full bg-black/80 hover:bg-[#ea0d23] text-white border border-white/30 hover:border-[#ea0d23] shadow-2xl backdrop-blur-2xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer select-none"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleComplete();
+          }}
+          className="flex items-center justify-center gap-2 px-5 py-3 sm:px-7 sm:py-3.5 rounded-full bg-black/85 hover:bg-[#ea0d23] text-white border border-white/30 hover:border-[#ea0d23] shadow-2xl backdrop-blur-2xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer select-none"
           aria-label="Skip Intro Video"
         >
-          <span className="text-[11px] sm:text-xs font-mono font-bold tracking-widest uppercase leading-none">
+          <span className="text-xs sm:text-xs font-mono font-bold tracking-widest uppercase leading-none">
             Skip Intro
           </span>
-          <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 text-white/90" />
+          <ChevronRight className="w-4 h-4 shrink-0 text-white" />
         </button>
+      </div>
+
+      {/* Mobile Tap hint */}
+      <div className="absolute bottom-7 left-6 z-20 pointer-events-none text-white/50 text-[11px] font-mono sm:hidden">
+        Tap anywhere to enter
       </div>
     </div>
   );

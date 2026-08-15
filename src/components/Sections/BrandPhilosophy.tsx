@@ -140,21 +140,22 @@ export default function BrandPhilosophy() {
             </span>
           </div>
 
-          <h2 className="font-satoshi font-black text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground uppercase tracking-tight leading-[1.08]">
+          <h2 className="font-satoshi font-black text-3xl xs:text-4xl sm:text-5xl md:text-6xl text-foreground uppercase tracking-tight leading-[1.08]">
             Attention is the <br className="hidden sm:inline" />
             <span className="text-accent">New Currency.</span>
           </h2>
 
-          <div className="w-16 h-[2px] bg-accent" />
+          <div className="w-16 h-[2.5px] bg-accent" />
 
-          <p className="text-secondary text-xs sm:text-base leading-relaxed max-w-xl font-normal">
+          <p className="text-secondary text-sm sm:text-base md:text-lg leading-relaxed max-w-xl font-normal">
             In an over-saturated digital landscape, noise is abundant but attention is scarce. We don&apos;t just build websites, design brands, or publish content. We build systems that capture attention, validate authority, and scale influence. 
           </p>
 
-          <p className="text-secondary/75 text-xs sm:text-sm leading-relaxed max-w-xl font-medium">
+          <p className="text-secondary/90 text-xs sm:text-sm md:text-base leading-relaxed max-w-xl font-medium">
             If your brand isn&apos;t commanding attention, you are invisible. We redefine branding from a passive identity to an active force of market gravity.
           </p>
         </div>
+
       </div>
     </section>
   );

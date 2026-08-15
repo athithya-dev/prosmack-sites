@@ -47,12 +47,12 @@ export default function Footer() {
         {/* Animated Spotlight "PROSMACK" Element */}
         <div
           ref={textRef}
-          className="relative w-full h-[18vw] min-h-[120px] max-h-[260px] flex justify-center items-center overflow-hidden cursor-default my-4"
+          className="relative w-full h-[18vw] min-h-[90px] sm:min-h-[120px] max-h-[260px] flex justify-center items-center overflow-hidden cursor-default my-4"
         >
           {/* Base Layer: Outlined Typography (adapts to light/dark themes) */}
           <div className="absolute inset-0 flex justify-center items-center">
             <h4
-              className="font-satoshi font-black text-[18vw] tracking-tighter uppercase leading-none select-none opacity-20"
+              className="font-satoshi font-black text-5xl xs:text-6xl sm:text-8xl md:text-[18vw] tracking-tighter uppercase leading-none select-none opacity-25"
               style={{
                 WebkitTextStroke: '2px var(--color-foreground, currentColor)',
                 color: 'transparent',
@@ -70,7 +70,7 @@ export default function Footer() {
             }}
           >
             <h4
-              className="font-satoshi font-black text-[18vw] tracking-tighter uppercase leading-none select-none text-accent"
+              className="font-satoshi font-black text-5xl xs:text-6xl sm:text-8xl md:text-[18vw] tracking-tighter uppercase leading-none select-none text-accent"
               style={{
                 textShadow: '0 0 60px rgba(234, 13, 35, 0.5)',
               }}
@@ -81,7 +81,7 @@ export default function Footer() {
         </div>
 
         {/* Minimal Copyright Metadata */}
-        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-foreground/10 text-xs text-secondary font-medium">
+        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-foreground/10 text-xs sm:text-sm text-secondary font-medium">
           <span>© {new Date().getFullYear()} PROSMACK agency. All rights reserved.</span>
           <div className="flex gap-6">
             <a href="#" className="hover:text-accent transition-colors duration-300">
@@ -92,6 +92,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
+
 
       </div>
     </footer>

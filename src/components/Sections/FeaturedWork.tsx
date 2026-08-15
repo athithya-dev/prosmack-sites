@@ -62,7 +62,7 @@ export default function FeaturedWork() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-satoshi uppercase tracking-tight text-white leading-tight text-center"
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-black font-satoshi uppercase tracking-tight text-white leading-tight text-center"
           >
             Client Impact & <br className="hidden sm:inline" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-red-500 to-orange-400">
@@ -75,7 +75,7 @@ export default function FeaturedWork() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-3 text-xs sm:text-base text-secondary max-w-lg mx-auto font-normal leading-relaxed text-center"
+            className="mt-3 text-sm sm:text-base text-secondary max-w-lg mx-auto font-normal leading-relaxed text-center"
           >
             Proven institutional campaigns and brand growth engineered for India&apos;s leading enterprises and public sector icons.
           </motion.p>
@@ -95,18 +95,19 @@ export default function FeaturedWork() {
             colors={{
               name: "#ffffff",
               designation: "#ea0d23",
-              testimony: "#a1a1aa",
-              arrowBackground: "rgba(255, 255, 255, 0.06)",
+              testimony: "#e4e4e7",
+              arrowBackground: "rgba(255, 255, 255, 0.08)",
               arrowForeground: "#ffffff",
               arrowHoverBackground: "#ea0d23",
             }}
             fontSizes={{
-              name: "clamp(1.15rem, 2vw, 1.75rem)",
-              designation: "0.75rem",
-              quote: "clamp(0.85rem, 1.3vw, 1rem)",
+              name: "clamp(1.35rem, 3.5vw, 2rem)",
+              designation: "0.85rem",
+              quote: "clamp(0.95rem, 2vw, 1.15rem)",
             }}
           />
         </motion.div>
+
 
       </div>
     </section>

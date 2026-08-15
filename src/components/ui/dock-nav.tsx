@@ -10,11 +10,12 @@ const DOCK_EASE = [0.16, 1, 0.3, 1] as const;
 const DOCK_DURATION = 0.5;
 
 const DOCK_WIDTH = {
-  base: "3.5rem",
-  far: "4.25rem",
-  close: "5rem",
-  active: "5.75rem",
+  base: "2.65rem",
+  far: "3.5rem",
+  close: "4.35rem",
+  active: "5.25rem",
 } as const;
+
 
 const dockNavVariants = cva("w-full", {
   variants: {

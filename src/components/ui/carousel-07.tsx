@@ -390,11 +390,11 @@ const Card = ({ slide, index, total, progress, config, onSelect }: CardProps) =>
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent pointer-events-none" />
 
         {/* Top Bar: Slide Index & Category Badge */}
-        <div className="absolute top-3.5 left-4 right-4 sm:top-5 sm:left-5 sm:right-5 flex items-center justify-between z-10 pointer-events-none">
-          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-white/80 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
+        <div className="absolute top-4 left-4 right-4 sm:top-5 sm:left-5 sm:right-5 flex items-center justify-between z-10 pointer-events-none">
+          <span className="text-xs sm:text-xs font-mono font-bold tracking-widest text-white/90 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/15">
             0{index + 1}
           </span>
-          <Badge className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-accent/90 backdrop-blur-md text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-white border-none shadow-lg shadow-accent/20">
+          <Badge className="px-3 sm:px-3.5 py-1 sm:py-1 rounded-full bg-accent/95 backdrop-blur-md text-xs sm:text-xs font-mono font-bold uppercase tracking-wider text-white border-none shadow-lg shadow-accent/30">
             {slide.badge}
           </Badge>
         </div>
@@ -405,7 +405,7 @@ const Card = ({ slide, index, total, progress, config, onSelect }: CardProps) =>
             style={{
               opacity: useTransform(offset, [-0.6, 0, 0.6], [0.4, 1, 0.4]),
             }}
-            className="text-base sm:text-lg md:text-xl font-satoshi font-black leading-tight mb-1.5 sm:mb-2 uppercase tracking-tight text-white drop-shadow-md text-center sm:text-left w-full"
+            className="text-lg sm:text-xl md:text-2xl font-satoshi font-black leading-tight mb-2 sm:mb-2 uppercase tracking-tight text-white drop-shadow-lg text-center sm:text-left w-full"
           >
             {slide.title}
           </motion.p>
@@ -413,11 +413,12 @@ const Card = ({ slide, index, total, progress, config, onSelect }: CardProps) =>
             style={{
               opacity: useTransform(offset, [-0.6, 0, 0.6], [0.2, 1, 0.2]),
             }}
-            className="text-xs sm:text-sm text-white/85 line-clamp-3 font-normal leading-relaxed text-center sm:text-left w-full"
+            className="text-sm sm:text-sm md:text-base text-white/90 line-clamp-3 font-normal leading-relaxed text-center sm:text-left w-full"
           >
             {slide.description}
           </motion.p>
         </div>
+
       </motion.div>
     </motion.div>
   );

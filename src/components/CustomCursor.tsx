@@ -17,6 +17,7 @@ export default function CustomCursor() {
   }, []);
 
   useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches) return;
     const cursor = cursorRef.current;
     const dot = dotRef.current;
     if (!cursor || !dot) return;

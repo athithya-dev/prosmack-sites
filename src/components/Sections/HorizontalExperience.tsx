@@ -191,29 +191,30 @@ export default function HorizontalExperience() {
 
               {/* Top Meta */}
               <div>
-                <span className="text-[10px] tracking-widest text-accent uppercase font-bold block mb-2 font-mono">
+                <span className="text-xs tracking-widest text-accent uppercase font-bold block mb-2.5 font-mono">
                   {slide.num} — {slide.tag}
                 </span>
-                <h3 className="font-satoshi font-black text-2xl sm:text-3xl text-foreground uppercase tracking-tight leading-snug">
+                <h3 className="font-satoshi font-black text-3xl sm:text-4xl text-foreground uppercase tracking-tight leading-tight">
                   {slide.title}
                 </h3>
               </div>
 
               {/* Description */}
-              <p className="text-secondary text-xs sm:text-sm leading-relaxed mt-4 mb-4">
+              <p className="text-secondary text-sm sm:text-base leading-relaxed mt-4 mb-5 font-normal">
                 {slide.desc}
               </p>
 
               {/* Footer Progress Tag */}
               <div className="pt-4 border-t border-foreground/10 flex items-center justify-between">
-                <span className="text-[10px] uppercase font-mono tracking-wider text-secondary">
+                <span className="text-xs uppercase font-mono tracking-wider text-secondary font-semibold">
                   ProSmack Studio
                 </span>
-                <span className="text-accent text-xs font-bold font-mono">
+                <span className="text-accent text-sm font-bold font-mono">
                   0{i + 1}
                 </span>
               </div>
             </div>
+
           ))}
         </div>
 
