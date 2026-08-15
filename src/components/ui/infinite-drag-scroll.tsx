@@ -6,7 +6,7 @@ import {
   motion,
   useMotionValue,
   wrap,
-} from "motion/react";
+} from "framer-motion";
 import {
   memo,
   useContext,
