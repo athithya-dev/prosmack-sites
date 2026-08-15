@@ -115,13 +115,34 @@ export default function Hero() {
             Without Limits.
           </span>
         </h1>
+
+        {/* Mobile-First Subtext */}
+        <p className="mt-6 sm:mt-8 text-secondary text-sm sm:text-base md:text-lg max-w-xl font-normal leading-relaxed text-left">
+          We engineer cinematic advertising systems and high-authority brand ecosystems that capture attention and scale market gravity.
+        </p>
+
+        {/* Mobile-First Action Buttons */}
+        <div className="flex flex-wrap items-center gap-3 mt-6 sm:mt-8">
+          <a
+            href="#featured-work"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-accent hover:bg-red-600 text-white font-satoshi font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-accent/25 active:scale-95 transition-all"
+          >
+            Featured Work
+          </a>
+          <a
+            href="#contact"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 text-white border border-white/15 font-satoshi font-bold text-xs sm:text-sm uppercase tracking-wider backdrop-blur-md active:scale-95 transition-all"
+          >
+            Get In Touch
+          </a>
+        </div>
       </div>
 
       {/* Scroll indicator (Touch-friendly for mobile) */}
       <a
         href="#services"
         ref={scrollIndicatorRef}
-        className="absolute bottom-6 sm:bottom-8 left-5 sm:left-8 md:left-16 flex items-center gap-3 text-xs tracking-[0.2em] text-secondary hover:text-foreground font-mono uppercase z-10 cursor-pointer active:scale-95 transition-transform"
+        className="absolute bottom-5 sm:bottom-8 left-5 sm:left-8 md:left-16 hidden sm:flex items-center gap-3 text-xs tracking-[0.2em] text-secondary hover:text-foreground font-mono uppercase z-10 cursor-pointer active:scale-95 transition-transform"
       >
         <span className="relative flex h-2.5 w-2.5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
@@ -130,6 +151,7 @@ export default function Hero() {
         <span>Scroll to discover</span>
       </a>
     </section>
+
 
 
   );

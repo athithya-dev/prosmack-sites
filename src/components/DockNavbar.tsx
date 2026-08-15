@@ -35,11 +35,12 @@ export default function DockNavbar() {
 
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[99] max-w-[95vw] sm:max-w-none">
+    <div className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-[99] max-w-[95vw] sm:max-w-none pointer-events-none mb-[env(safe-area-inset-bottom)]">
       {/* Dock Backplate */}
-      <div className="px-3 py-1.5 bg-surface/80 backdrop-blur-2xl border border-foreground/10 rounded-[2rem] shadow-[0_15px_30px_rgba(0,0,0,0.15)] flex items-center justify-center">
-        <DockNav items={dockItems} align="center" className="h-12 flex items-center" />
+      <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-surface/90 backdrop-blur-2xl border border-foreground/15 rounded-[2rem] shadow-[0_20px_40px_rgba(0,0,0,0.4)] flex items-center justify-center pointer-events-auto">
+        <DockNav items={dockItems} align="center" className="h-11 sm:h-12 flex items-center" />
       </div>
     </div>
   );
+
 }

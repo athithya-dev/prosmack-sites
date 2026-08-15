@@ -64,11 +64,12 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out flex items-center ${
         isScrolled
-          ? 'h-16 bg-background/40 backdrop-blur-md border-b border-foreground/5'
-          : 'h-24 bg-transparent'
+          ? 'h-14 sm:h-16 bg-background/70 backdrop-blur-xl border-b border-foreground/10 shadow-lg shadow-black/20'
+          : 'h-16 sm:h-20 bg-transparent'
       }`}
     >
-      <div className="w-full max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-3 items-center h-full">
+      <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 md:px-16 grid grid-cols-3 items-center h-full">
+
         {/* Left Column (Empty spacing) */}
         <div className="w-full" />
 
