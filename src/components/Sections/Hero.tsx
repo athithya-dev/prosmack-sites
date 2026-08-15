@@ -102,7 +102,7 @@ export default function Hero() {
       <div className="relative max-w-7xl mx-auto w-full z-10 py-16 sm:py-20 md:py-28 flex flex-col justify-center">
         <h1
           ref={headlineRef}
-          className="font-satoshi font-black tracking-tight leading-[0.92] text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-[8.5vw] text-left uppercase flex flex-col justify-start items-start gap-1.5 sm:gap-2.5"
+          className="font-satoshi font-black tracking-tight leading-[0.92] text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-[8.5vw] text-left uppercase flex flex-col justify-start items-start gap-2 sm:gap-2.5"
         >
           <span className="hero-line block overflow-hidden transform-gpu text-white">
             Advertising.
@@ -115,6 +115,7 @@ export default function Hero() {
           </span>
         </h1>
       </div>
+
 
       {/* Scroll indicator */}
       <div

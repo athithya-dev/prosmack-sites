@@ -37,24 +37,24 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative w-full bg-background text-foreground pt-12 pb-32 sm:pb-36 px-6 sm:px-8 md:px-16 overflow-hidden select-none"
+      className="relative w-full bg-background text-foreground pt-8 sm:pt-12 pb-20 sm:pb-24 px-5 sm:px-8 md:px-16 overflow-hidden select-none"
     >
       {/* Centered Ambient Lighting */}
-      <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/5 rounded-full blur-[180px] -z-10" />
+      <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-accent/5 rounded-full blur-[160px] -z-10" />
 
       <div className="max-w-7xl mx-auto w-full flex flex-col items-center justify-center relative z-10">
         
         {/* Animated Spotlight "PROSMACK" Element */}
         <div
           ref={textRef}
-          className="relative w-full h-[18vw] min-h-[90px] sm:min-h-[120px] max-h-[260px] flex justify-center items-center overflow-hidden cursor-default my-4"
+          className="relative w-full flex justify-center items-center overflow-hidden cursor-default py-2 sm:py-4 my-2"
         >
-          {/* Base Layer: Outlined Typography (adapts to light/dark themes) */}
-          <div className="absolute inset-0 flex justify-center items-center">
+          {/* Base Layer: Outlined Typography */}
+          <div className="flex justify-center items-center w-full">
             <h4
-              className="font-satoshi font-black text-5xl xs:text-6xl sm:text-8xl md:text-[18vw] tracking-tighter uppercase leading-none select-none opacity-25"
+              className="font-satoshi font-black text-6xl xs:text-7xl sm:text-8xl md:text-[18vw] tracking-tighter uppercase leading-none select-none opacity-30 text-center"
               style={{
-                WebkitTextStroke: '2px var(--color-foreground, currentColor)',
+                WebkitTextStroke: '1.5px var(--color-foreground, currentColor)',
                 color: 'transparent',
               }}
             >
@@ -70,7 +70,7 @@ export default function Footer() {
             }}
           >
             <h4
-              className="font-satoshi font-black text-5xl xs:text-6xl sm:text-8xl md:text-[18vw] tracking-tighter uppercase leading-none select-none text-accent"
+              className="font-satoshi font-black text-6xl xs:text-7xl sm:text-8xl md:text-[18vw] tracking-tighter uppercase leading-none select-none text-accent text-center"
               style={{
                 textShadow: '0 0 60px rgba(234, 13, 35, 0.5)',
               }}
@@ -81,7 +81,7 @@ export default function Footer() {
         </div>
 
         {/* Minimal Copyright Metadata */}
-        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-foreground/10 text-xs sm:text-sm text-secondary font-medium">
+        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-foreground/10 text-xs sm:text-sm text-secondary font-medium">
           <span>© {new Date().getFullYear()} PROSMACK agency. All rights reserved.</span>
           <div className="flex gap-6">
             <a href="#" className="hover:text-accent transition-colors duration-300">
@@ -93,8 +93,8 @@ export default function Footer() {
           </div>
         </div>
 
-
       </div>
     </footer>
   );
 }
+
